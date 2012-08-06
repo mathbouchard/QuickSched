@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <title>QuickSched (beta)</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="jquery-ui-1.8.21.custom.css" />
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <style>
+        
+        body {
+            font-family:helvetica,tahoma,verdana,sans-serif;
+            padding:0px;
+            font-size:13px;
+            margin:0;
+            background: #667179;
+        }
+        #topcontent {
+            margin: 0px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;
+            background: transparent;
+            height:100px;
+            width:100%;
+        }
+        #logo {
+            background:url(img/q-opt_small_logo.png) no-repeat center center transparent;
+            width:100px;
+        }
+        #title {
+            background: transparent;
+            color: #fff;
+            width:280pt;
+            text-shadow: 2px 2px 5px rgba(0.1,0.1,0.1,0.5);
+            font-size:30px;
+        }
+        #topelem {
+            list-style-type: none;
+            margin: 0px 0px 0px 0px;
+            padding: 0;
+        }
+        #topelem li {
+            margin: -0px 0px 0px 0px;
+            padding: 0;
+        }
+        #loginzone {
+            height:100px;
+            width:400px;
+            background: transparent;
+        }
+        #dologin {
+            width:100px;
+            height:40px;
+            background: #fff;
+            position: absolute;
+            right: 20px;
+            top: 30px;
+            font-size: 13px;
+            -moz-border-radius:1px;
+            -webkit-border-radius:1px;
+        }
+        .borderelementr {
+            margin: 0px 0px 0px 0px;
+            float: right;
+            height:100px;
+        }
+        .borderelement {
+            margin: 0px 0px 0px 0px;
+            float: left;
+            height:100px;
+        }
+        .hundredblock {
+            margin: 0px 0px 0px 0px;
+            float: left;
+            height:100px;
+            width:100px;
+        }
+        #maintabs {
+            position: relative;
+            padding-left: 0px;
+            background: transparent;
+            padding:0;
+            margin: 0;
+            border: 0;
+            -khtml-border-top-right-radius: 0px;
+            border-top-right-radius: 0px;
+            -khtml-border-bottom-right-radius: 0px;
+            border-bottom-right-radius: 0px;       
+        }
+        #maintabs .ui-tabs-nav {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 82px;
+            padding: 0;
+            background: transparent;
+            -khtml-border-top-right-radius: 0px;
+            border-top-right-radius: 0px;
+            -khtml-border-top-left-radius: 0px;
+            border-top-left-radius: 0px;
+            -khtml-border-bottom-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            -khtml-border-bottom-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
+        
+        #maintabs .ui-widget-header {
+            background: #465159;
+            border: none;
+        }
+        #maintabs .ui-state-default {
+            background: transparent;
+            border: none;
+        }
+        #maintabs .ui-state-active {
+            background: transparent url(img/rarrow.png) no-repeat right center;
+            border: none;
+        }
+        #maintabs .ui-state-default a {
+            color: #c0c0c0;
+        }
+        #maintabs .ui-state-active a {
+            color: #fff;
+        }
+        
+        .mainpanel {
+            -khtml-border-top-left-radius: 5px;
+            border-top-left-radius: 5px;
+            -khtml-border-bottom-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            -khtml-border-bottom-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+        
+        #workers {
+            background: #fff;
+            position: absolute;
+            left: 82px;
+            padding: 10px 0px 0px 10px;
+            border-left: 1px;
+            border-left-color: #000;
+            border-left-style: solid;
+            border-top: 1px;
+            border-top-color: #000;
+            border-top-style: solid;
+        }
+        #tasks {
+            background: #fff;
+            position: absolute;
+            left: 82px;
+            padding: 10px 0px 0px 10px;
+            border-left: 1px;
+            border-left-color: #000;
+            border-left-style: solid;
+            border-top: 1px;
+            border-top-color: #000;
+            border-top-style: solid;
+        }
+        #shifts {
+            background: #fff;
+            position: absolute;
+            left: 82px;
+            padding: 10px 0px 0px 10px;
+            border-left: 1px;
+            border-left-color: #000;
+            border-left-style: solid;
+            border-top: 1px;
+            border-top-color: #000;
+            border-top-style: solid;
+        }
+        #resources {
+            background: #fff;
+            position: absolute;
+            left: 82px;
+            padding: 10px 0px 0px 10px;
+            border-left: 1px;
+            border-left-color: #000;
+            border-left-style: solid;
+            border-top: 1px;
+            border-top-color: #000;
+            border-top-style: solid;
+        }
+        #tags {
+            background: #fff;
+            position: absolute;
+            left: 82px;
+            padding: 10px 0px 0px 10px;
+            border-left: 1px;
+            border-left-color: #000;
+            border-left-style: solid;
+            border-top: 1px;
+            border-top-color: #000;
+            border-top-style: solid;
+        }
+        #solver {
+            background: #fff;
+            position: absolute;
+            left: 82px;
+            padding: 10px 0px 0px 10px;
+            border-left: 1px;
+            border-left-color: #000;
+            border-left-style: solid;
+            border-top: 1px;
+            border-top-color: #000;
+            border-top-style: solid;
+        }
+        #solution {
+            background: #fff;
+            position: absolute;
+            left: 82px;
+            padding: 10px 0px 0px 10px;
+            border-left: 1px;
+            border-left-color: #000;
+            border-left-style: solid;
+            border-top: 1px;
+            border-top-color: #000;
+            border-top-style: solid;
+        }
+        #settings {
+            background: #fff;
+            position: absolute;
+            left: 82px;
+            padding: 10px 0px 0px 10px;
+            border-left: 1px;
+            border-left-color: #000;
+            border-left-style: solid;
+            border-top: 1px;
+            border-top-color: #000;
+            border-top-style: solid;
+        }
+        
+    </style>
+    <script type="text/javascript" src="jquery.js"></script>  
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+           $( "#maintabs" ).tabs();
+           myresize();
+           $(window).resize(function() {
+                myresize();
+            });
+           
+        });
+        
+        function myresize() {
+            var newh = $(window).height()-111;
+            var neww = $(window).width()-93;
+            $( "#workers" ).width(neww);
+            $( "#workers" ).height(newh);
+            $( "#tasks" ).width(neww);
+            $( "#tasks" ).height(newh);
+            $( "#shifts" ).width(neww);
+            $( "#shifts" ).height(newh);
+            $( "#resources" ).width(neww);
+            $( "#resources" ).height(newh);
+            $( "#tags" ).width(neww);
+            $( "#tags" ).height(newh);
+            $( "#solver" ).width(neww);
+            $( "#solver" ).height(newh);
+            $( "#solution" ).width(neww);
+            $( "#solution" ).height(newh);
+            $( "#settings" ).width(neww);
+            $( "#settings" ).height(newh);
+        }
+    </script>
+</head>
+<body>
+    <div id="topcontent">
+        <ul id="topelem">
+            <li><div class="borderelement hundredblock"></div></li>
+            <li><div id="logo" class="borderelement"></div></li>
+            <li><div id="title" class="borderelement">
+                <h3>QuickSchedule (beta)</h3>
+            </div></li>
+            <li ><div id="loginzone" class="borderelementr"><input type="button" value="Login" id="dologin"/></div></li>
+        </ul>
+        
+    </div>
+    <div id="maintabs">
+            <ul>
+                <li><a href="#workers"><img src="img/worker-col.png"><div style="font-size: 10px; text-align: center">Workers</div></a></li>
+                <li><a href="#tasks"><img src="img/task-col.png"><div style="font-size: 10px; text-align: center">Tasks</div></a></li>
+                <li><a href="#shifts"><img src="img/shift-col.png"><div style="font-size: 10px; text-align: center">Shifts</div></a></li>
+                <li><a href="#resources"><img src="img/resource-col.png"><div style="font-size: 10px; text-align: center">Resources</div></a></li>
+                <li><a href="#tags"><img src="img/tag-col.png"><div style="font-size: 10px; text-align: center">Tags</div></a></li>
+                <li><a href="#solver"><img src="img/solver-col.png"><div style="font-size: 10px; text-align: center">Solver</div></a></li>
+                <li><a href="#solution"><img src="img/solution-col.png"><div style="font-size: 10px; text-align: center">Solution</div></a></li>
+                <li><a href="#settings"><img src="img/setting-col.png"><div style="font-size: 10px; text-align: center">Settings</div></a></li>
+            </ul>
+            <div id="workers" class="mainpanel">Workers</div>
+            <div id="tasks" class="mainpanel">Tasks</div>
+            <div id="shifts" class="mainpanel">Shifts</div>
+            <div id="resources" class="mainpanel">Resources</div>
+            <div id="tags" class="mainpanel">Tags</div>
+            <div id="solver" class="mainpanel">Solver</div>
+            <div id="solution" class="mainpanel">Solution</div>
+            <div id="settings" class="mainpanel">Settings</div>
+    </div>
+</body>                                                                 
+</html>
