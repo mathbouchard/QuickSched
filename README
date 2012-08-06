@@ -1,0 +1,19 @@
+                                                     Mathieu Bouchard
+
+QuickSched Version 0.1
+
+Copyright (C) 2012 Mathieu Bouchard. All rights reserved.
+E-mail: <mathbouchard@gmail.com>.
+
+QuickSched is part of the GNU Project released under the aegis of GNU.
+
+QuickSched is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+See the file LICENSE for the GNU General Public License.
+
+The QuickSched package is a set of files that constitutes a schedule optimization
+web application. The package covers the web interface and the tomcat server side.
+ 
