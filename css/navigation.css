@@ -1,0 +1,281 @@
+/*!
+ * QuickSchedule Navigation Style Sheet
+ *
+ * Copyright 2012, Mathieu Bouchard
+ * Licensed under the GPL Version 3 license.
+ * http://q-opt.com
+ *
+ */
+
+/* General
+----------------------------------*/
+body {
+    font-family:helvetica,tahoma,verdana,sans-serif;
+    padding:0px;
+    font-size:13px;
+    margin:0;
+    /*background: #465159;*/
+    background: #d6e1e9;
+}
+
+/* Top bar
+----------------------------------*/
+#topcontent {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    background: transparent;
+    height:100px;
+    width:100%;
+}
+#logo {
+    background:url(../img/q-opt_small_logo.png) no-repeat center center transparent;
+    width:100px;
+}
+#title {
+    background: transparent;
+    color: #000;
+    width:280pt;
+    text-shadow: 2px 2px 5px rgba(0.1,0.1,0.1,0.5);
+    font-size:30px;
+}
+#topelem {
+    list-style-type: none;
+    margin: 0px 0px 0px 0px;
+    padding: 0;
+}
+#topelem li {
+    margin: -0px 0px 0px 0px;
+    padding: 0;
+}
+#sealimg {
+    height:100px;
+    width:100px;
+    position: absolute;
+    right: 520px;
+    top: 30px;
+    background: transparent;
+}
+#loginzone {
+    height:100px;
+    width:400px;
+    background: transparent;
+}
+#dologin {
+    color:#000000;
+    width:100px;
+    height:40px;
+    background: #fff;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    font-size: 13px;
+    -moz-border-radius:1px;
+    -webkit-border-radius:1px;
+}
+
+#userzone {
+    height:100px;
+    width:auto;
+    background: transparent;
+}
+#dologout {
+    color:#000000;
+    width:100px;
+    height:40px;
+    background: #fff;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    font-size: 13px;
+    -moz-border-radius:1px;
+    -webkit-border-radius:1px;
+}
+
+#usernametag {
+    color:#000;
+    width:auto;
+    height:40px;
+    background: transparent;
+    position: absolute;
+    right: 130px;
+    top: 30px;
+    font-size: 15px;
+    -moz-border-radius:1px;
+    -webkit-border-radius:1px;
+}
+
+/* Left menu
+----------------------------------*/
+
+.borderelementr {
+    margin: 0px 0px 0px 0px;
+    float: right;
+    height:100px;
+}
+.borderelement {
+    margin: 0px 0px 0px 0px;
+    float: left;
+    height:100px;
+}
+.hundredblock {
+    margin: 0px 0px 0px 0px;
+    float: left;
+    height:100px;
+    width:100px;
+}
+#maintabs {
+    position: relative;
+    padding-left: 0px;
+    background: transparent;
+    padding:0;
+    margin: 0;
+    border: 0;
+    -khtml-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+    -khtml-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;       
+}
+#maintabs .ui-tabs-nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 82px;
+    padding: 0;
+    background: transparent;
+    -khtml-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+    -khtml-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    -khtml-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    -khtml-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+#maintabs .ui-widget-header {
+    background: #465159;
+    border: none;
+}
+#maintabs .ui-state-default {
+    background: transparent;
+    border: none;
+}
+#maintabs .ui-state-active {
+    background: transparent url(../img/rarrow.png) no-repeat right center;
+    border: none;
+}
+#maintabs .ui-state-default a {
+    color: #404040;
+    
+}
+#maintabs .ui-state-active a {
+    color: #000;
+    font-weight: bold;    
+}
+
+.mainpanel {
+    -khtml-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -khtml-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    -khtml-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#workers {
+    background: #fff;
+    position: absolute;
+    left: 82px;
+    padding: 10px 0px 0px 10px;
+    border-left: 1px;
+    border-left-color: #000;
+    border-left-style: solid;
+    border-top: 1px;
+    border-top-color: #000;
+    border-top-style: solid;
+}
+#tasks {
+    background: #fff;
+    position: absolute;
+    left: 82px;
+    padding: 10px 0px 0px 10px;
+    border-left: 1px;
+    border-left-color: #000;
+    border-left-style: solid;
+    border-top: 1px;
+    border-top-color: #000;
+    border-top-style: solid;
+}
+#shifts {
+    background: #fff;
+    position: absolute;
+    left: 82px;
+    padding: 10px 0px 0px 10px;
+    border-left: 1px;
+    border-left-color: #000;
+    border-left-style: solid;
+    border-top: 1px;
+    border-top-color: #000;
+    border-top-style: solid;
+}
+#resources {
+    background: #fff;
+    position: absolute;
+    left: 82px;
+    padding: 10px 0px 0px 10px;
+    border-left: 1px;
+    border-left-color: #000;
+    border-left-style: solid;
+    border-top: 1px;
+    border-top-color: #000;
+    border-top-style: solid;
+}
+#tags {
+    background: #fff;
+    position: absolute;
+    left: 82px;
+    padding: 10px 0px 0px 10px;
+    border-left: 1px;
+    border-left-color: #000;
+    border-left-style: solid;
+    border-top: 1px;
+    border-top-color: #000;
+    border-top-style: solid;
+}
+#solver {
+    background: #fff;
+    position: absolute;
+    left: 82px;
+    padding: 10px 0px 0px 10px;
+    border-left: 1px;
+    border-left-color: #000;
+    border-left-style: solid;
+    border-top: 1px;
+    border-top-color: #000;
+    border-top-style: solid;
+}
+#solution {
+    background: #fff;
+    position: absolute;
+    left: 82px;
+    padding: 10px 0px 0px 10px;
+    border-left: 1px;
+    border-left-color: #000;
+    border-left-style: solid;
+    border-top: 1px;
+    border-top-color: #000;
+    border-top-style: solid;
+}
+#settings {
+    background: #fff;
+    position: absolute;
+    left: 82px;
+    padding: 10px 0px 0px 10px;
+    border-left: 1px;
+    border-left-color: #000;
+    border-left-style: solid;
+    border-top: 1px;
+    border-top-color: #000;
+    border-top-style: solid;
+}

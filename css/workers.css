@@ -1,0 +1,70 @@
+/*!
+ * QuickSchedule Worker Style Sheet
+ *
+ * Copyright 2012, Mathieu Bouchard
+ * Licensed under the GPL Version 3 license.
+ * http://q-opt.com
+ *
+ */
+
+.wblock{
+    font-size:9px;
+    list-style-type: none;
+    float: left;
+    width: 180px;
+    height: 70px;
+    margin: 5px 5px 5px 5px;
+    padding: 0px;
+    background:#fff;
+    /*margin-bottom:10px;*/
+    line-height:1.7;
+    box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+    -moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    text-align:center;
+    transition: box-shadow 1s;
+    -moz-transition: -moz-box-shadow 1s;
+    -webkit-transition: -webkit-box-shadow 1s;
+}
+.wblock:hover {
+    box-shadow: 0 1px 13px rgba(34,25,25,1);
+    -moz-box-shadow: 0 1px 13px rgba(34,25,25,1);
+    -webkit-box-shadow: 0 1px 13px rgba(34,25,25,1);
+}
+
+.wblock h3{
+    font-weight: bold;
+    font-size:11px;
+    color:#7A8489;
+    margin:0 0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    text-align:center;
+    border-bottom:4px #ccc;
+}
+
+.wblock img{
+    float:left;
+    width: 70px;
+    height: 70px;
+}
+
+.waddblock{
+    font-weight: bold;
+    font-size:11px;
+    color:#7A8489;
+    border: dashed;
+    border-color: #444;
+    border-width: 1px;
+    box-shadow: 0px 0px 0px 0px;
+    -moz-box-shadow: 0px 0px 0px 0px;
+    -webkit-box-shadow: 0px 0px 0px 0px;
+    width: 178px;
+    height: 68px;
+}
+
+.wblocktext{
+    padding: 10px 0px 0px 0px;
+}
