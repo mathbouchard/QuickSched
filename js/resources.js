@@ -11,10 +11,9 @@
     $.fn.extend({ 
         //plugin name - animatemenu
         resourcesScreen: function(opts) {          
-            $( this ).empty(); 
-            
             return this.each(function() {
                 var obj = $(this);
+                obj.empty();
                    
                 var ulist = $('<ul></ul>').appendTo( $( this ) );
     
@@ -42,11 +41,11 @@
     });
 })(jQuery);
 
-function getresourcesdata() {
+function getresourcesdata(done) {
     $.qsglobal.resources = null;
     var taginfo = {token:$.qsglobal.session_token};
-    postjson('https://localhost:8443/RestSchedWS/qsdata/getresources', taginfo, function(data) {
+    postjson($.qsglobal.dbaddr+'getresources', taginfo, function(data) {
         if(data != null)
             $.qsglobal.resources = data.slice();
-    });
+    }, true, done);
 }

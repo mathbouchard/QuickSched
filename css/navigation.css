@@ -14,8 +14,35 @@ body {
     padding:0px;
     font-size:13px;
     margin:0;
-    /*background: #465159;*/
-    background: #d6e1e9;
+    /*background: #465159;
+    background: #d6e1e9;*/
+    background: #e9f1f9;
+}
+
+.ui-widget-header .ui-icon {
+    background-image: url(images/ui-icons_222222_256x240.png);
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    color: #7A8489;
+    background: #fff;
+    border-color: #999;
+    border-bottom: solid;
+    border-width: 0 0 1px 0px;
+
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    color:#fff;
+    background: #95a0ff;
+}
+
+#fullscreen {
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    background: #fff;
+    border-width: 1px;
+    border: solid;
 }
 
 /* Top bar
@@ -61,16 +88,16 @@ body {
     background: transparent;
 }
 #dologin {
-    color:#000000;
+    color:#fff;
     width:100px;
     height:40px;
-    background: #fff;
+    background: #95a0ff;
     position: absolute;
     right: 20px;
     top: 30px;
     font-size: 13px;
-    -moz-border-radius:1px;
-    -webkit-border-radius:1px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
 }
 
 #userzone {
@@ -79,16 +106,16 @@ body {
     background: transparent;
 }
 #dologout {
-    color:#000000;
+    color:#fff;
     width:100px;
     height:40px;
-    background: #fff;
+    background: #95a0ff;
     position: absolute;
     right: 20px;
     top: 30px;
     font-size: 13px;
-    -moz-border-radius:1px;
-    -webkit-border-radius:1px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
 }
 
 #usernametag {

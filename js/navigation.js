@@ -9,7 +9,7 @@
 
 function myresize() {
     var newh = $(document).height()-111;
-    var neww = $(document).width()-93;
+    var neww = $(window).width()-93;
     $( "#workers" ).width(neww);
     $( "#workers" ).height(newh);
     $( "#tasks" ).width(neww);

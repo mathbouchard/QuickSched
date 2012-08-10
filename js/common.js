@@ -14,29 +14,36 @@
     });
 })(jQuery);
 
-function postjson(inurl, indata, insuccess) {
+function postjson(inurl, indata, insuccess, isasync, ondone) {
     $.ajax({
         headers: { 
             Accept : "application/json; charset=utf-8",
             "Content-Type": "application/json; charset=utf-8"
         },
         type: "POST",
-        async: false,
+        async: isasync,
         url: inurl,
         data: JSON.stringify(indata),
         success: insuccess,
         dataType: "json"
+    }).done(function() { 
+        ondone();
     });
 }
 
 function getalldata() {
-    getworkersdata();
-    $( "#workers" ).workersScreen();
-    gettagsdata();
-    $( "#tags" ).tagsScreen();
-    getresourcesdata();
-    $( "#resources" ).resourcesScreen();
+    getworkersdata(showworkers);
+    gettagsdata(showtags);
+    getresourcesdata(showresources);
+    gettasksdata(showtasks);
+    getshiftsdata(showshifts);
 }
+
+function showworkers() { $( "#workers" ).workersScreen(); }
+function showtags() { $( "#tags" ).tagsScreen(); }
+function showresources() { $( "#resources" ).resourcesScreen(); }
+function showtasks() { $( "#tasks" ).tasksScreen(); }
+function showshifts() { $( "#shifts" ).shiftsScreen(); }
 
 function resetalldata() {
     $.qsglobal.workers = null;

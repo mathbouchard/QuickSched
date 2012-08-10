@@ -24,9 +24,9 @@
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     text-align:center;
-    transition: box-shadow 1s;
-    -moz-transition: -moz-box-shadow 1s;
-    -webkit-transition: -webkit-box-shadow 1s;
+    transition: box-shadow 0.5s;
+    -moz-transition: -moz-box-shadow 0.5s;
+    -webkit-transition: -webkit-box-shadow 0.5s;
 }
 .tblock:hover {
     box-shadow: 0 1px 13px rgba(34,25,25,1);
@@ -49,12 +49,16 @@
     float:left;
     width: 70px;
     height: 70px;
+    -moz-border-radius:5px 0px 0px 5px;
+    -webkit-border-radius:5px 0px 0px 5px;
 }
 
 .tcolorblock{
     float:left;
     width: 70px;
     height: 70px;
+    -moz-border-radius:5px 0px 0px 5px;
+    -webkit-border-radius:5px 0px 0px 5px;
 }
 
 .taddblock{

@@ -17,11 +17,14 @@ jQuery(document).ready(function() {
     $.qsglobal.solver = null;
     $.qsglobal.solution = null;
     $.qsglobal.settings = null;
+    $.qsglobal.isfullscreen = false;
+    $.qsglobal.dbaddr = "https://localhost:8443/RestSchedWS/qsdata/"; 
     
     $.qsglobal.session_token = null
     $.qsglobal.username = "";
     $.qsglobal.waitobj = "";
 
+    $( "#fullscreen" ).hide();
     $( "#maintabs" ).tabs();
     $(window).resize(function() { myresize(); });
     myresize();
@@ -31,5 +34,5 @@ jQuery(document).ready(function() {
     $( "#dologout" ).button().click(function() { logout(); });
     
     initLogin();
-    setTimeout(function() { myresize();}, 100);
+    setTimeout(function() { myresize(); }, 100);
 });

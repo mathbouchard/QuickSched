@@ -56,7 +56,7 @@
                             loginfo.username = name.val();
                             loginfo.password = password.val();
                             
-                            postjson('https://localhost:8443/RestSchedWS/qsdata/login', loginfo, function(data) {
+                            postjson($.qsglobal.dbaddr+'login', loginfo, function(data) {
                                 if(data.success == "true")
                                 {
                                     $.cookie("quicksched-lt", data.token, { expires: 1 });
@@ -147,7 +147,7 @@
                                 loginfo.password = password.val();
                                 loginfo.email = email.val();
                             
-                                postjson('https://localhost:8443/RestSchedWS/qsdata/register', loginfo, function(data) {
+                                postjson($.qsglobal.dbaddr+'register', loginfo, function(data) {
                                     if(data.success == "true") {
                                         $.cookie("quicksched-lt", data.token, { expires: 1 });
                                         $.cookie("quicksched-un", loginfo.username, { expires: 1 });
