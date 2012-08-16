@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
     $.qsglobal.shifts = null;
     $.qsglobal.resources = null;
     $.qsglobal.tags = null;
+    $.qsglobal.maps = null;
     $.qsglobal.solver = null;
     $.qsglobal.solution = null;
     $.qsglobal.settings = null;

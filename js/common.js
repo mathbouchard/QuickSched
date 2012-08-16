@@ -26,8 +26,10 @@ function postjson(inurl, indata, insuccess, isasync, ondone) {
         data: JSON.stringify(indata),
         success: insuccess,
         dataType: "json"
-    }).done(function() { 
-        ondone();
+    }).done(function() {
+        if(ondone != null) {
+            ondone();
+        }
     });
 }
 
@@ -37,13 +39,14 @@ function getalldata() {
     getresourcesdata(showresources);
     gettasksdata(showtasks);
     getshiftsdata(showshifts);
+    getmapsdata(showshifts);
 }
 
-function showworkers() { $( "#workers" ).workersScreen(); }
-function showtags() { $( "#tags" ).tagsScreen(); }
-function showresources() { $( "#resources" ).resourcesScreen(); }
-function showtasks() { $( "#tasks" ).tasksScreen(); }
-function showshifts() { $( "#shifts" ).shiftsScreen(); }
+function showworkers() { $( "#workers" ).workersScreen({loff: 83, toff: 101}); }
+function showtags() { $( "#tags" ).tagsScreen({loff: 83, toff: 101}); }
+function showresources() { $( "#resources" ).resourcesScreen({loff: 83, toff: 101}); }
+function showtasks() { $( "#tasks" ).tasksScreen({loff: 83, toff: 101}); }
+function showshifts() { $( "#shifts" ).shiftsScreen({loff: 83, toff: 101}); }
 
 function resetalldata() {
     $.qsglobal.workers = null;
@@ -51,6 +54,7 @@ function resetalldata() {
     $.qsglobal.shifts = null;
     $.qsglobal.resources = null;
     $.qsglobal.tags = null;
+    $.qsglobal.maps = null;
     $.qsglobal.solver = null;
     $.qsglobal.solution = null;
     $.qsglobal.settings = null;
@@ -62,6 +66,15 @@ function resetalldata() {
     $( "#solver" ).empty();
     $( "#solution" ).empty();
     $( "#settings" ).empty();
+}
+
+function getmapsdata(done) {
+    $.qsglobal.tasks = null;
+    var mapinfo = {token:$.qsglobal.session_token};
+    postjson($.qsglobal.dbaddr+'getmaps', mapinfo, function(data) {
+        if(data != null)
+            $.qsglobal.maps = data.slice();
+    }, true, done);
 }
 
 /*

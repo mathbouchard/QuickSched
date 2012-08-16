@@ -23,7 +23,7 @@
     margin: 10px 0px 10px 0px;
     padding: 0px;
     height: 40px;
-    background:#fff;
+    background:#fffffa;
     
     box-shadow: 0 1px 3px rgba(34,25,25,0.4);
     -moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
@@ -32,9 +32,16 @@
     -webkit-border-radius:5px;
     text-align:center;
     transition: box-shadow 0.5s;
-    -moz-transition: -moz-box-shadow 0.5s;
-    -webkit-transition: -webkit-box-shadow 0.5s;
+    -moz-transition: -moz-box-shadow 0.1s;
+    -webkit-transition: -webkit-box-shadow 0.1s;
 }
+
+.ganttcontainer ul .ui-selected {
+    border: solid;
+    border-width: 2px;
+    border-color: #f00;
+}
+
 .ganttblock:hover {
     box-shadow: 0 1px 13px rgba(34,25,25,1);
     -moz-box-shadow: 0 1px 13px rgba(34,25,25,1);
@@ -86,7 +93,6 @@
 
 .ganttback{
     position: absolute;
-    top: 50px;
     border: solid;
     border-color: #eee;
     border-width: 0px 0px 0px 1px;
@@ -104,7 +110,6 @@
 
 .gantthead{
     position: absolute;
-    top: 20px;
     height: 30px;
     border: solid;
     border-color: #eee;

@@ -8,8 +8,8 @@
  */
 
 function myresize() {
-    var newh = $(document).height()-111;
-    var neww = $(window).width()-93;
+    var newh = $(document).height()-101;
+    var neww = $(window).width()-83;
     $( "#workers" ).width(neww);
     $( "#workers" ).height(newh);
     $( "#tasks" ).width(neww);
@@ -26,4 +26,7 @@ function myresize() {
     $( "#solution" ).height(newh);
     $( "#settings" ).width(neww);
     $( "#settings" ).height(newh);
+    $( "#taskgantt" ).width(neww);
+    $( "#taskgantt" ).height(newh-66);
+    $( "#taskbar" ).width(neww-20);
 }

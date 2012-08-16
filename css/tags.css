@@ -6,6 +6,41 @@
  * http://q-opt.com
  *
  */
+.taglist .ui-selected {
+    border: solid;
+    border-width: 2px;
+    border-color: #f00;
+    margin: 3px 3px 3px 3px;
+}
+
+#tagbar {
+    /*padding: 15px 15px 0px 10px;*/
+    padding: 17px 0px 13px 20px;
+    background: transparent;
+    height: 35px;
+    width: 100%;
+    border-bottom: solid;
+    border-bottom-color: #333;
+    border-bottom-width: 1px;
+}
+
+#tagbar .ui-state-default {
+    background: #fff;
+    color: #333;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
+}
+#tagbar .ui-state-active {
+    background: #95a0ff;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
+}
+
+#tags ul {
+    padding-left: 17px;
+}
 
 .tblock{
     font-size:9px;
@@ -76,5 +111,6 @@
 }
 
 .tblocktext{
-    padding: 10px 0px 0px 0px;
+    padding: 10px 5px 5px 5px;
+    overflow: hidden;
 }

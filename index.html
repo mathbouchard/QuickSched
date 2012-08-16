@@ -21,6 +21,8 @@
     <script type="text/javascript" src="js/jquery.js"></script>  
     <script type="text/javascript" src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/allmap.js"></script>
+    <script type="text/javascript" src="js/colorpicker.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/gantt.js"></script>
     <script type="text/javascript" src="js/workers.js"></script>
@@ -33,41 +35,44 @@
     <script type="text/javascript" src="js/quicksched.js"></script>
 </head>
 <body>
-    <div id="topcontent">
-        <ul id="topelem">
-            <li><div class="borderelement hundredblock"></div></li>
-            <li><div id="logo" class="borderelement"></div></li>
-            <li><div id="title" class="borderelement">
-                <h3>QuickSchedule (beta)</h3>
-            </div></li>
-           <!-- <li><div id="cdSiteSeal1" class="borderelementr"><script id="sealimg" type="text/javascript" src="//tracedseals.starfieldtech.com/siteseal/get?scriptId=cdSiteSeal1&amp;cdSealType=Seal1&amp;sealId=55e4ye7y7mb73b45102be08020c4d8rhvh7y7mb7355e4ye70dc3c7b95ad9c33a"></script></div></li> -->
-            <li ><div id="loginzone" class="borderelementr"><input type="button" value="Login" id="dologin" href="#login-form"/></div></li>
-            <li ><div id="userzone" class="borderelementr"><h2 id="usernametag">myuser name</h2><input type="button" value="Logout" id="dologout"/></div></li>
-        </ul>     
-    </div>
-    <div id="maintabs">
-            <ul>
-                <li><a href="#workers"><img src="img/worker-col.png"><div style="font-size: 10px; text-align: center">Workers</div></a></li>
-                <li><a href="#tasks"><img src="img/task-col.png"><div style="font-size: 10px; text-align: center">Tasks</div></a></li>
-                <li><a href="#shifts"><img src="img/shift-col.png"><div style="font-size: 10px; text-align: center">Shifts</div></a></li>
-                <li><a href="#resources"><img src="img/resource-col.png"><div style="font-size: 10px; text-align: center">Resources</div></a></li>
-                <li><a href="#tags"><img src="img/tag-col.png"><div style="font-size: 10px; text-align: center">Tags</div></a></li>
-                <li><a href="#solver"><img src="img/solver-col.png"><div style="font-size: 10px; text-align: center">Solver</div></a></li>
-                <li><a href="#solution"><img src="img/solution-col.png"><div style="font-size: 10px; text-align: center">Solution</div></a></li>
-                <li><a href="#settings"><img src="img/setting-col.png"><div style="font-size: 10px; text-align: center">Settings</div></a></li>
-            </ul>
-            <div id="workers" class="mainpanel"></div>
-            <div id="tasks" class="mainpanel">Tasks</div>
-            <div id="shifts" class="mainpanel">Shifts</div>
-            <div id="resources" class="mainpanel"></div>
-            <div id="tags" class="mainpanel"></div>
-            <div id="solver" class="mainpanel">Solver</div>
-            <div id="solution" class="mainpanel">Solution</div>
-            <div id="settings" class="mainpanel">Settings</div>
+    <div id="appmain">
+        <div id="topcontent">
+            <ul id="topelem">
+                <li><div class="borderelement hundredblock"></div></li>
+                <li><div id="logo" class="borderelement"></div></li>
+                <li><div id="title" class="borderelement">
+                    <h3>QuickSchedule (beta)</h3>
+                </div></li>
+               <!-- <li><div id="cdSiteSeal1" class="borderelementr"><script id="sealimg" type="text/javascript" src="//tracedseals.starfieldtech.com/siteseal/get?scriptId=cdSiteSeal1&amp;cdSealType=Seal1&amp;sealId=55e4ye7y7mb73b45102be08020c4d8rhvh7y7mb7355e4ye70dc3c7b95ad9c33a"></script></div></li> -->
+                <li ><div id="loginzone" class="borderelementr"><input type="button" value="Login" id="dologin" href="#login-form"/></div></li>
+                <li ><div id="userzone" class="borderelementr"><h2 id="usernametag">myuser name</h2><input type="button" value="Logout" id="dologout"/></div></li>
+            </ul>     
+        </div>
+        <div id="maintabs">
+                <ul>
+                    <li><a href="#workers"><img src="img/worker-col.png"><div style="font-size: 10px; text-align: center">Workers</div></a></li>
+                    <li><a href="#tasks"><img src="img/task-col.png"><div style="font-size: 10px; text-align: center">Tasks</div></a></li>
+                    <li><a href="#shifts"><img src="img/shift-col.png"><div style="font-size: 10px; text-align: center">Shifts</div></a></li>
+                    <li><a href="#resources"><img src="img/resource-col.png"><div style="font-size: 10px; text-align: center">Resources</div></a></li>
+                    <li><a href="#tags"><img src="img/tag-col.png"><div style="font-size: 10px; text-align: center">Tags</div></a></li>
+                    <li><a href="#solver"><img src="img/solver-col.png"><div style="font-size: 10px; text-align: center">Solver</div></a></li>
+                    <li><a href="#solution"><img src="img/solution-col.png"><div style="font-size: 10px; text-align: center">Solution</div></a></li>
+                    <li><a href="#settings"><img src="img/setting-col.png"><div style="font-size: 10px; text-align: center">Settings</div></a></li>
+                </ul>
+                <div id="workers" class="mainpanel"></div>
+                <div id="tasks" class="mainpanel"></div>
+                <div id="shifts" class="mainpanel"></div>
+                <div id="resources" class="mainpanel"></div>
+                <div id="tags" class="mainpanel"></div>
+                <div id="solver" class="mainpanel">Solver</div>
+                <div id="solution" class="mainpanel">Solution</div>
+                <div id="settings" class="mainpanel">Settings</div>
+        </div>
     </div>
     <div id="login-form" title="Login"></div>
     <div id="register-form" title="Register"></div>
     <div id="tag-form" title="Tags"></div>
+    <div id="resource-form" title="Resources"></div>
     <div id="fullscreen"></div>
 </body>                                                                 
 </html>
