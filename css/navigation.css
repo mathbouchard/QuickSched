@@ -16,7 +16,8 @@ body {
     margin:0;
     /*background: #465159;
     background: #d6e1e9;*/
-    background: #e9f1f9;
+    /*background: #e9f1f9;*/
+    background: #444;
     /*background: #9DB6FA;*/
 }
 
@@ -25,7 +26,7 @@ body {
 }
 
 .vmap-hover {
-    outline: -webkit-focus-ring-color auto 40px;
+    outline: #a0b4d2 solid 40px;
 }
 
 .ui-dialog {
@@ -57,7 +58,8 @@ body {
 
 .simpleColorSelectButton {
     height: 35px;
-    background: #95a0ff;
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
     color: #fff;
     padding : 2px 20px 2px 20px;
     -moz-border-radius:3px;
@@ -66,7 +68,8 @@ body {
 
 .simpleColorCancelButton {
     height: 35px;
-    background: #95a0ff;
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
     color: #fff;
     padding : 2px 20px 2px 20px;
     -moz-border-radius:3px;
@@ -91,7 +94,8 @@ body {
 }
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
     color:#fff;
-    background: #95a0ff;
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
 }
 
 #fullscreen {
@@ -117,7 +121,8 @@ body {
 }
 #title {
     background: transparent;
-    color: #000;
+    /*color: #000;*/
+    color: #fff;
     width:280pt;
     text-shadow: 2px 2px 5px rgba(0.1,0.1,0.1,0.5);
     font-size:30px;
@@ -148,7 +153,8 @@ body {
     color:#fff;
     width:100px;
     height:40px;
-    background: #95a0ff;
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
     position: absolute;
     right: 20px;
     top: 30px;
@@ -166,7 +172,8 @@ body {
     color:#fff;
     width:100px;
     height:40px;
-    background: #95a0ff;
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
     position: absolute;
     right: 20px;
     top: 30px;
@@ -176,7 +183,8 @@ body {
 }
 
 #usernametag {
-    color:#000;
+    /*color:#000;*/
+    color:#fff;
     width:auto;
     height:40px;
     background: transparent;
@@ -186,6 +194,60 @@ body {
     font-size: 15px;
     -moz-border-radius:1px;
     -webkit-border-radius:1px;
+}
+
+.qstableline{
+    float: left;
+    font-size:11px;
+    list-style-type: none;
+    height: 25px;
+    margin: 3px;
+    padding: 4px 14px 4px 4px;
+    background-image: url(../img/leaves.png);
+    /*background-image: url('css/images/ui-bg_diagonals-thick_45_cd0a0a_40x40.png');*/ /*#fff;*/
+    border: solid;
+    color: #444;
+    border-color: #339933;
+    border-width: 1px 1px 1px 1px;    
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    text-align:center;
+}
+
+.qstabletag{
+    float: left;
+    padding: 5px 10px 0 10px;
+    margin: 0 0 0 10px;
+    font-size:11px;
+    list-style-type: none;
+    height: 20px;
+    border: solid;
+    font-weight: bold;
+    color: #fff;
+    border-color: #444;
+    border-width: 0 1px 1px 1px;
+    background: #95a0ff;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-align:center;
+    text-align:left;
+}
+.qstableval{
+    float: left;
+    padding: 5px 10px 0 10px;
+    margin: 0 0 0 0;
+    font-size:11px;
+    list-style-type: none;
+    height: 20px;
+    border: solid;
+    color: #444;
+    border-color: #444;
+    border-width: 0 1px 1px 1px;
+    background: #fff;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-align:center;
+    text-align:left;
 }
 
 /* Left menu
@@ -238,23 +300,27 @@ body {
 }
 
 #maintabs .ui-widget-header {
-    background: #465159;
     border: none;
 }
-#maintabs .ui-state-default {
+#maintabs .qs-left-menu {
+    width: 82px;
+    overflow: hidden;
     background: transparent;
     border: none;
 }
-#maintabs .ui-state-active {
+#maintabs .ui-tabs-selected  {
+    width: 82px;
+    overflow: hidden;
     background: transparent url(../img/rarrow.png) no-repeat right center;
     border: none;
 }
 #maintabs .ui-state-default a {
-    color: #404040;
-    
+    /*color: #404040;*/
+    color: #eee;
 }
 #maintabs .ui-state-active a {
-    color: #000;
+    /*color: #000;*/
+    color: #fff;
     font-weight: bold;    
 }
 
@@ -273,10 +339,10 @@ body {
     left: 82px;
     padding: 0;
     border-left: 1px;
-    border-left-color: #000;
+    border-left-color: #fff;
     border-left-style: solid;
     border-top: 1px;
-    border-top-color: #000;
+    border-top-color: #888;
     border-top-style: solid;
 }
 #tasks {
@@ -285,10 +351,10 @@ body {
     left: 82px;
     padding: 0;
     border-left: 1px;
-    border-left-color: #000;
+    border-left-color: #fff;
     border-left-style: solid;
     border-top: 1px;
-    border-top-color: #000;
+    border-top-color: #888;
     border-top-style: solid;
 }
 #shifts {
@@ -297,10 +363,10 @@ body {
     left: 82px;
     padding: 0;
     border-left: 1px;
-    border-left-color: #000;
+    border-left-color: #fff;
     border-left-style: solid;
     border-top: 1px;
-    border-top-color: #000;
+    border-top-color: #888;
     border-top-style: solid;
 }
 #resources {
@@ -309,10 +375,10 @@ body {
     left: 82px;
     padding: 0;
     border-left: 1px;
-    border-left-color: #000;
+    border-left-color: #fff;
     border-left-style: solid;
     border-top: 1px;
-    border-top-color: #000;
+    border-top-color: #888;
     border-top-style: solid;
 }
 #tags {
@@ -321,10 +387,10 @@ body {
     left: 82px;
     padding: 0;
     border-left: 1px;
-    border-left-color: #000;
+    border-left-color: #fff;
     border-left-style: solid;
     border-top: 1px;
-    border-top-color: #000;
+    border-top-color: #888;
     border-top-style: solid;
 }
 #solver {
@@ -333,10 +399,10 @@ body {
     left: 82px;
     padding: 0;
     border-left: 1px;
-    border-left-color: #000;
+    border-left-color: #fff;
     border-left-style: solid;
     border-top: 1px;
-    border-top-color: #000;
+    border-top-color: #888;
     border-top-style: solid;
 }
 #solution {
@@ -345,10 +411,10 @@ body {
     left: 82px;
     padding: 0;
     border-left: 1px;
-    border-left-color: #000;
+    border-left-color: #fff;
     border-left-style: solid;
     border-top: 1px;
-    border-top-color: #000;
+    border-top-color: #888;
     border-top-style: solid;
 }
 #settings {
@@ -357,9 +423,9 @@ body {
     left: 82px;
     padding: 0;
     border-left: 1px;
-    border-left-color: #000;
+    border-left-color: #fff;
     border-left-style: solid;
     border-top: 1px;
-    border-top-color: #000;
+    border-top-color: #888;
     border-top-style: solid;
 }

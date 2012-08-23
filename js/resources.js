@@ -27,14 +27,32 @@
                 
                 $("<span id=\"resradioassign\"></span>").html(
                     "<input type=\"radio\" id=\"resradioedit\" checked=\"checked\" name=\"resradioassign\"/><label for=\"resradioedit\">Edit</label>"+
-                    "<input type=\"radio\" id=\"resradioworker\" name=\"resradioassign\"/><label for=\"resradioworker\">Workers</label>"+
                     "<input type=\"radio\" id=\"resradiotag\" name=\"resradioassign\"/><label for=\"resradiotag\">Tags</label>"+
+                    "<input type=\"radio\" id=\"resradioworker\" name=\"resradioassign\"/><label for=\"resradioworker\">Workers</label>"+
                     "<input type=\"radio\" id=\"resradiotask\" name=\"resradioassign\"/><label for=\"resradiotask\">Tasks</label>")
                     .css('float','left').buttonset().appendTo(bbar);
                 
                 $( "#resradioedit" ).button().click(function() {
                     $( "#currvmap" ).remove();
                     $( "#currreslist" ).show();
+                });
+                $( "#resradiotag" ).button().click(function() {
+                    $( "#currvmap" ).remove();
+                    $( "#currreslist" ).hide();
+                    var newwin = $( "<div id=\"currvmap\"></div>" ).appendTo(obj);
+                    newwin.vMap({
+                        type: 7,
+                        pos: 1,
+                        loff: options.loff,
+                        toff: options.toff+67,
+                        updesc: function(val) {return val.desc+' ('+val.capacity+')';},
+                        upobj: $.qsglobal.resources,
+                        upblockclass: 'rblock',
+                        uptextclass: 'rblocktext',
+                        downobj: $.qsglobal.tags,
+                        downblockclass: 'tblock',
+                        downtextclass: 'tblocktext',
+                    });
                 });
                 $( "#resradioworker" ).button().click(function() {
                     $( "#currvmap" ).remove();
@@ -57,24 +75,6 @@
                         downtextclass: 'wblocktext',
                     });
                 });
-                $( "#resradiotag" ).button().click(function() {
-                    $( "#currvmap" ).remove();
-                    $( "#currreslist" ).hide();
-                    var newwin = $( "<div id=\"currvmap\"></div>" ).appendTo(obj);
-                    newwin.vMap({
-                        type: 7,
-                        pos: 1,
-                        loff: options.loff,
-                        toff: options.toff+67,
-                        updesc: function(val) {return val.desc+' ('+val.capacity+')';},
-                        upobj: $.qsglobal.resources,
-                        upblockclass: 'rblock',
-                        uptextclass: 'rblocktext',
-                        downobj: $.qsglobal.tags,
-                        downblockclass: 'tblock',
-                        downtextclass: 'tblocktext',
-                    });
-                });
                 $( "#resradiotask" ).button().click(function() {
                     $( "#currvmap" ).remove();
                     $( "#currreslist" ).hide();
@@ -94,7 +94,7 @@
                     });
                 });
                 
-                $( "<span><button id=\"resfullscreen\">Hey</button></span>").css('float','right').appendTo(bbar).css('height', '32').css('background', '#95a0ff')
+                $( "<span><button id=\"resfullscreen\">Fullscreen</button></span>").css('float','right').appendTo(bbar).css('height', '32').css('background', '#a0b4d2')
                     .button({text: false, icons: {primary: "ui-icon-arrowthick-2-ne-sw"}}).click(function() {
                         if(!$.qsglobal.isfullscreen) {
                             $.qsglobal.isfullscreen = true;
@@ -113,27 +113,34 @@
                             $("#resources").resourcesScreen({loff: 83, toff: 101});
                         }
                     });
-                $( "<span><button id=\"restrash\"></button></span>").css('float','right').appendTo(bbar).css('height', '32')
-                    .css('background', '#95a0ff').button({text: false, icons: {primary: "ui-icon-trash"}}).click(function() {
+                $( "<span><button id=\"restrash\">Delete</button></span>").css('float','right').appendTo(bbar).css('height', '32')
+                    .css('background', '#a0b4d2').button({text: false, icons: {primary: "ui-icon-trash"}}).click(function() {
+                        rem=[];
                         $( ".ui-selected", ".reslist" ).each(function() {
-                            var ind = $("#currreslist li").index(this);
-                            ind=ind-1;
+                            var ind = $("#currreslist li").index(this)-1;
+                            rem.push(ind);
+                            var sub=0;
+                            $.each(rem, function(key,val) {
+                                if(val<ind) {
+                                    sub++;
+                                }
+                            });
+                            ind=ind-sub;
                             
                             var resinfo = {token:$.qsglobal.session_token, id:$( this ).attr( "resourceid" )};
                             postjson($.qsglobal.dbaddr+'delresources', resinfo, function(data) {
-                                if(data.success == "true")
-                                {
+                                if(data.success == "true") {
                                     $.qsglobal.resources.splice(ind,1);
-                                    if(!$.qsglobal.isfullscreen) {
-                                        $("#resources").resourcesScreen({loff: 83, toff: 101});
-                                    } else {
-                                        $("#fullscreen").resourcesScreen();
-                                    }
                                 } else {
                                     alert("Delete failed.");
                                 }
                             }, false, null);
 			});
+                        if(!$.qsglobal.isfullscreen) {
+                            $("#resources").resourcesScreen({loff: 83, toff: 101});
+                        } else {
+                            $("#fullscreen").resourcesScreen();
+                        }
                     });
                 
                 var ulist = $('<ul class="reslist" id="currreslist"></ul>').appendTo( $( this ) );
@@ -168,7 +175,7 @@
             return this.each(function() {
                 var o =options;
                 var obj = $(this);
-                $(this).css('background', '#a0b4d2');
+                //$(this).css('background', '#a0b4d2');
                 
                 
                 var inname = '',

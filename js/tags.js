@@ -108,7 +108,7 @@
                         downtextclass: 'rblocktext',
                     });
                 });
-                $( "<span><button id=\"tagfullscreen\">Hey</button></span>").css('float','right').appendTo(bbar).css('height', '32').css('background', '#95a0ff')
+                $( "<span><button id=\"tagfullscreen\">Fullscreen</button></span>").css('float','right').appendTo(bbar).css('height', '32').css('background', '#a0b4d2')
                     .button({text: false, icons: {primary: "ui-icon-arrowthick-2-ne-sw"}}).click(function() {
                         if(!$.qsglobal.isfullscreen) {
                             $.qsglobal.isfullscreen = true;
@@ -127,28 +127,34 @@
                             $("#tags").tagsScreen({loff: 83, toff: 101});
                         }
                     });
-                $( "<span><button id=\"tagtrash\"></button></span>").css('float','right').appendTo(bbar).css('height', '32')
-                    .css('background', '#95a0ff').button({text: false, icons: {primary: "ui-icon-trash"}}).click(function() {
-                        
+                $( "<span><button id=\"tagtrash\">Delete</button></span>").css('float','right').appendTo(bbar).css('height', '32')
+                    .css('background', '#a0b4d2').button({text: false, icons: {primary: "ui-icon-trash"}}).click(function() {
+                        rem=[];
                         $( ".ui-selected", ".taglist" ).each(function() {
                             var ind = $("#currtaglist li").index(this)-1;
+                            rem.push(ind);
+                            var sub=0;
+                            $.each(rem, function(key,val) {
+                                if(val<ind) {
+                                    sub++;
+                                }
+                            });
+                            ind=ind-sub;
                             
                             var taginfo = {token:$.qsglobal.session_token, id:$( this ).attr( "tagid" )};
                             postjson($.qsglobal.dbaddr+'deltags', taginfo, function(data) {
-                                if(data.success == "true")
-                                {
+                                if(data.success == "true") {
                                     $.qsglobal.tags.splice(ind,1);
-                                    //tosub++;
-                                    if(!$.qsglobal.isfullscreen) {
-                                        $("#tags").tagsScreen({loff: 83, toff: 101});
-                                    } else {
-                                        $("#fullscreen").tagsScreen();
-                                    }
                                 } else {
                                     alert("Delete failed.");
                                 }
                             }, false, null);
 			});
+                        if(!$.qsglobal.isfullscreen) {
+                            $("#tags").tagsScreen({loff: 83, toff: 101});
+                        } else {
+                            $("#fullscreen").tagsScreen();
+                        }
                     });
                 
                 var ulist = $('<ul class="taglist" id="currtaglist"></ul>').appendTo( $( this ) );
@@ -184,7 +190,7 @@
             return this.each(function() {
                 var o =options;
                 var obj = $(this);
-                $(this).css('background', '#a0b4d2');
+                //$(this).css('background', '#a0b4d2');
                 
                 
                 var inname = '',

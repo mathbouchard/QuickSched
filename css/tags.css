@@ -32,7 +32,8 @@
     border-width: 1px;
 }
 #tagbar .ui-state-active {
-    background: #95a0ff;
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
     border: solid;
     border-color: #333;
     border-width: 1px;

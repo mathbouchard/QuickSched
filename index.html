@@ -18,9 +18,13 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/tasks.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/shifts.css" />
     <link rel="shortcut icon" href="favicon.ico">
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script> 
     <script type="text/javascript" src="js/jquery.js"></script>  
     <script type="text/javascript" src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.map.full.min.js"></script>
+    <!-- <script type="text/javascript" src="js/jquery.ui.map.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.map.services.js"></script> -->
     <script type="text/javascript" src="js/allmap.js"></script>
     <script type="text/javascript" src="js/colorpicker.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
@@ -50,14 +54,14 @@
         </div>
         <div id="maintabs">
                 <ul>
-                    <li><a href="#workers"><img src="img/worker-col.png"><div style="font-size: 10px; text-align: center">Workers</div></a></li>
-                    <li><a href="#tasks"><img src="img/task-col.png"><div style="font-size: 10px; text-align: center">Tasks</div></a></li>
-                    <li><a href="#shifts"><img src="img/shift-col.png"><div style="font-size: 10px; text-align: center">Shifts</div></a></li>
-                    <li><a href="#resources"><img src="img/resource-col.png"><div style="font-size: 10px; text-align: center">Resources</div></a></li>
-                    <li><a href="#tags"><img src="img/tag-col.png"><div style="font-size: 10px; text-align: center">Tags</div></a></li>
-                    <li><a href="#solver"><img src="img/solver-col.png"><div style="font-size: 10px; text-align: center">Solver</div></a></li>
-                    <li><a href="#solution"><img src="img/solution-col.png"><div style="font-size: 10px; text-align: center">Solution</div></a></li>
-                    <li><a href="#settings"><img src="img/setting-col.png"><div style="font-size: 10px; text-align: center">Settings</div></a></li>
+                    <li class="qs-left-menu"><a href="#workers"><img src="img/worker-col.png"><div style="font-size: 10px; text-align: center">Workers</div></a></li>
+                    <li class="qs-left-menu"><a href="#tasks"><img src="img/task-col.png"><div style="font-size: 10px; text-align: center">Tasks</div></a></li>
+                    <li class="qs-left-menu"><a href="#shifts"><img src="img/shift-col.png"><div style="font-size: 10px; text-align: center">Shifts</div></a></li>
+                    <li class="qs-left-menu"><a href="#resources"><img src="img/resource-col.png"><div style="font-size: 10px; text-align: center">Resources</div></a></li>
+                    <li class="qs-left-menu"><a href="#tags"><img src="img/tag-col.png"><div style="font-size: 10px; text-align: center">Tags</div></a></li>
+                    <li class="qs-left-menu"><a href="#solver"><img src="img/solver-col.png"><div style="font-size: 10px; text-align: center">Solver</div></a></li>
+                    <li class="qs-left-menu"><a href="#solution"><img src="img/solution-col.png"><div style="font-size: 10px; text-align: center">Solution</div></a></li>
+                    <li class="qs-left-menu"><a href="#settings"><img src="img/setting-col.png"><div style="font-size: 10px; text-align: center">Settings</div></a></li>
                 </ul>
                 <div id="workers" class="mainpanel"></div>
                 <div id="tasks" class="mainpanel"></div>
@@ -71,8 +75,15 @@
     </div>
     <div id="login-form" title="Login"></div>
     <div id="register-form" title="Register"></div>
+    <div id="worker-form" title="Workers"></div>
+    <div id="task-form" title="Tasks"></div>
+    <div id="shift-form" title="Shifts"></div>
     <div id="tag-form" title="Tags"></div>
     <div id="resource-form" title="Resources"></div>
+    <div id="leave-form" title="Leaves"></div>
+    <div id="break-form" title="Breaks"></div>
+    <div id="taskres-form" title="Breaks"></div>
+    <div id="locmap" title="Set location"></div>
     <div id="fullscreen"></div>
 </body>                                                                 
 </html>

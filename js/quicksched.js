@@ -18,6 +18,7 @@ jQuery(document).ready(function() {
     $.qsglobal.solver = null;
     $.qsglobal.solution = null;
     $.qsglobal.settings = null;
+    $.qsglobal.mapid = null;
     $.qsglobal.isfullscreen = false;
     $.qsglobal.dbaddr = "https://localhost:8443/RestSchedWS/qsdata/"; 
     
@@ -25,6 +26,7 @@ jQuery(document).ready(function() {
     $.qsglobal.username = "";
     $.qsglobal.waitobj = "";
 
+    
     $( "#fullscreen" ).hide();
     $( "#maintabs" ).tabs();
     $(window).resize(function() { myresize(); });
@@ -32,8 +34,7 @@ jQuery(document).ready(function() {
     $( "#login-form" ).loginScreen();
     $( "#register-form" ).registerScreen();
     $( "#dologin" ).button().click(function() { $( "#login-form" ).dialog( "open" ); });
-    $( "#dologout" ).button().click(function() { logout(); });
-    
+    $( "#dologout" ).button().click(function() { logout(); });  
     initLogin();
     setTimeout(function() { myresize(); }, 100);
 });

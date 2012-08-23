@@ -23,6 +23,21 @@
     border-bottom-width: 1px;
 }
 
+#task-edit .ui-state-default {
+    background: #fff;
+    color: #333;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
+}
+#task-edit .ui-state-active {
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
+}
+
 #taskbar .ui-state-default {
     background: #fff;
     color: #333;
@@ -31,7 +46,8 @@
     border-width: 1px;
 }
 #taskbar .ui-state-active {
-    background: #95a0ff;
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
     border: solid;
     border-color: #333;
     border-width: 1px;

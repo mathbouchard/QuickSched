@@ -24,7 +24,7 @@
                 var o =options;
                 var obj = $(this);
                 
-                $(this).css('background', '#a0b4d2');
+                //$(this).css('background', '#a0b4d2');
                    
                 var type_log = $('<div id="type-login"><div>').appendTo( $( this ) );
                 type_log.append($('<p class="validateTips">All form fields are required.</p>'));
@@ -101,7 +101,7 @@
                 var o =options;
                 var obj = $(this);
                 
-                $(this).css('background', '#a0b4d2');
+                //$(this).css('background', '#a0b4d2');
                    
                 var type_reg = $('<div id="type-register"><div>').appendTo( $( this ) );
                 type_reg.append($('<p class="validateTips">All form fields are required.</p>'));

@@ -49,7 +49,7 @@
                         var imgpart = "";
                         if(o.upimg) {
                             var imglink = "img/someone_wb.png";
-                            if(val.picturelink != null) {
+                            if(val.picturelink != null && val.picturelink != "") {
                                 imglink = val.picturelink;  
                             }
                             imgpart = '<img src="'+imglink+'"></img>';
@@ -80,7 +80,7 @@
                         var imgpart = "";
                         if(o.downimg) {
                             var imglink = "img/someone_wb.png";
-                            if(val.picturelink != null) {
+                            if(val.picturelink != null && val.picturelink != "") {
                                 imglink = val.picturelink;  
                             }
                             imgpart = '<img src="'+imglink+'"></img>';
@@ -103,9 +103,11 @@
                     drop: function( event, ui ) {
                         var mapinfo = {};
                         if(o.pos == 1) {
-                            mapinfo = {token:$.qsglobal.session_token, id2: $( this ).attr("objid"), id1: ui.draggable.attr("objid"), type: o.type, qty: 1};
+                            mapinfo = {token:$.qsglobal.session_token, id2: $( this ).attr("objid"), id1: ui.draggable.attr("objid"),
+                                type: o.type, qty: 1, starttime: "0:00", duration: "0:00"};
                         } else {
-                            mapinfo = {token:$.qsglobal.session_token, id1: $( this ).attr("objid"), id2: ui.draggable.attr("objid"), type: o.type, qty: 1};
+                            mapinfo = {token:$.qsglobal.session_token, id1: $( this ).attr("objid"), id2: ui.draggable.attr("objid"), 
+                                type: o.type, qty: 1, starttime: "0:00", duration: "0:00"};
                         }
                         postjson($.qsglobal.dbaddr+'addmaps', mapinfo, function(data) {
                             if(data.success == "true")
@@ -152,7 +154,7 @@
                 
                 var objmap = {};
                 var corrmap = {};
-                var mapid = setmapid(o,o.subobj);
+                setmapid(o,o.subobj);
          
                 var subid = [];
                 if(o.subobj != null) {
@@ -188,6 +190,9 @@
                     temp = $( "<li></li>" ).html('<div class="tcolorblock" style="background:'+item.color+'">'+imgpart
                         +'</div><div class="'+o.textclass+'"><h3>'+o.name(item)+'</h3>'+o.desc(item)+'</div>').addClass(o.blockclass).attr("objid", item.id)
                         .addClass("lmapobj");
+                    if(o.type==4)
+                        temp.dblclick(function() {$("#taskres-form").taskresEditScreen({item: o.subobj[$.qsglobal.mapid[item.id]], ind: $.qsglobal.mapid[item.id]})
+                            .dialog("open");});
                     
                     llist.append(temp);
                 });
@@ -199,7 +204,7 @@
                         if(objmap[val.id] != true) {
                             if(o.img) {
                                 var imglink = "img/someone_wb.png";
-                                if(val.picturelink != null) {
+                                if(val.picturelink != null && val.picturelink != "") {
                                     imglink = val.picturelink;  
                                 }
                                 imgpart = '<img src="'+imglink+'"></img>';
@@ -215,7 +220,7 @@
                 var torem = null;
                 var toadd = null;
                 
-                makedragdrop(o,torem,toadd,mapid);
+                makedragdrop(o,torem,toadd);
                 
                 obj.dialog({
 		    autoOpen: false,
@@ -231,12 +236,12 @@
     });
 })(jQuery);
 
-function makedragdrop(o, torem, toadd, mapid) {
+function makedragdrop(o, torem, toadd) {
     $("#rlist li").draggable({
         helper: function() {
             torem = $(this);
             toadd = $( "<li></li>" ).html($(this).html()).addClass(o.blockclass).attr("objid", $(this).attr("objid"))
-                    .addClass("lmapobj");
+                    .addClass("rmapobj");
             return toadd;
         },
         opacity: 0.7,
@@ -246,8 +251,9 @@ function makedragdrop(o, torem, toadd, mapid) {
         activeClass: "vmap-active",
         drop: function( event, ui ) {
             var temp = $( "<li></li>" ).html(toadd.html()).addClass(o.blockclass).attr("objid", toadd.attr("objid"))
-                    .addClass("lmapobj");
+                    .addClass("rmapobj");
             $("#rlist").append(temp);
+            
             torem.remove();
             
             var mapinfo = {token:$.qsglobal.session_token, id1: toadd.attr("objid"), id2: o.id, type: o.type, qty: 1};
@@ -258,8 +264,8 @@ function makedragdrop(o, torem, toadd, mapid) {
             postjson($.qsglobal.dbaddr+'delmaps', mapinfo, function(data) {
                 if(data.success == "true")
                 {
-                    o.subobj.splice(mapid[toadd.attr("objid")],1);
-                    setmapid(o, mapid);
+                    o.subobj.splice($.qsglobal.mapid[toadd.attr("objid")],1);
+                    setmapid(o, o.subobj);
                 } else {
                     alert("Delete failed.")
                 }
@@ -285,6 +291,9 @@ function makedragdrop(o, torem, toadd, mapid) {
             var temp = $( "<li></li>" ).html(toadd.html()).addClass(o.blockclass).attr("objid", toadd.attr("objid"))
                     .addClass("lmapobj");
             $("#llist").append(temp);
+            if(o.type==4)
+                temp.dblclick(function() {$("#taskres-form").taskresEditScreen({item: o.subobj[$.qsglobal.mapid[temp.attr("objid")]], ind: $.qsglobal.mapid[temp.attr("objid")]})
+                    .dialog("open");});
             torem.remove();
             
             var mapinfo = {token:$.qsglobal.session_token, id1: toadd.attr("objid"), id2: o.id, type: o.type, qty: 1};
@@ -296,7 +305,7 @@ function makedragdrop(o, torem, toadd, mapid) {
                 if(data.success == "true")
                 {
                     o.subobj.push(mapinfo);
-                    setmapid(o,mapid);
+                    setmapid(o,o.subobj);
                 } else {
                     alert("Delete failed.")
                 }
@@ -309,15 +318,16 @@ function makedragdrop(o, torem, toadd, mapid) {
 }
 
 function setmapid(o,obj) {
-    var ret = {};
+    $.qsglobal.mapid = {};
     if(obj != null) {
         $.each(obj, function(key,val) {
-            if(o.pos == 1) {
-                ret[val.id2] = key;
-            } else {
-                ret[val.id1] = key;
+            if(val.type == o.type) {
+                if(o.pos == 1) {
+                    $.qsglobal.mapid[val.id2] = key;
+                } else {
+                    $.qsglobal.mapid[val.id1] = key;
+                }
             }
         });
     }
-    return ret;
 }

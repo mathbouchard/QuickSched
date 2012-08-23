@@ -7,9 +7,62 @@
  *
  */
 
+.breaklist .ui-selected {
+    border: solid;
+    border-width: 2px;
+    border-color: #f00;
+    margin: 3px;
+    padding: 3px 3px 3px 3px;
+}
+
+#currbreaklist {
+    padding: 5px;
+}
+
+#break-edit .ui-state-default {
+    background: #fff;
+    color: #333;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
+}
+#break-edit .ui-state-active {
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
+}
+
+.breakdiv{
+    background: #f8f8f8;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    height: 98%;
+    margin: 5px 15px 5px 5px;
+    border: solid;
+    border-color: #aaa;
+    border-width: 1px;
+}
+
 #shiftgantt {
     padding-left: 0px;
     position: absolute;
+}
+
+#shift-edit .ui-state-default {
+    background: #fff;
+    color: #333;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
+}
+#shift-edit .ui-state-active {
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
 }
 
 #shiftbar {
@@ -31,7 +84,8 @@
     border-width: 1px;
 }
 #shiftbar .ui-state-active {
-    background: #95a0ff;
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
     border: solid;
     border-color: #333;
     border-width: 1px;

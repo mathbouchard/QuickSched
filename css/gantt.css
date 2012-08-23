@@ -8,7 +8,7 @@
  */
 
 .ganttcontainer{
-    overflow: scroll;
+    overflow-x: scroll;
     margin: 0;
     padding: 0;
 }
@@ -23,7 +23,7 @@
     margin: 10px 0px 10px 0px;
     padding: 0px;
     height: 40px;
-    background:#fffffa;
+    background:#fefefe;
     
     box-shadow: 0 1px 3px rgba(34,25,25,0.4);
     -moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
@@ -51,6 +51,7 @@
 .ganttblockadd {
     color:#7A8489;
     padding-top: 8px;
+    height: 32px;
     font-weight: bold;
     font-size:11px;
     border: dashed;
@@ -66,7 +67,8 @@
     width: 100px;
     font-weight: bold;
     font-size:11px;
-    background:#95a0ff;
+    /*background:#95a0ff;*/
+    background: #a0b4d2;
     color:#fff;
     border: solid;
     border-color: #aaa;
