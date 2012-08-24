@@ -53,6 +53,7 @@
                     $( "#taskgantt" ).show();
                     $( "#taskslider" ).show();
                     $( "#tasktrash" ).show();
+                    $( "#tasknotebutton" ).show();
                     $( "#tasksliderlabel" ).show();
                 });
                 $( "#taskradiotag" ).button().click(function() {
@@ -61,6 +62,7 @@
                     $( "#taskslider" ).hide();
                     $( "#tasksliderlabel" ).hide();
                     $( "#tasktrash" ).hide();
+                    $( "#tasknotebutton" ).hide();
                     var newwin = $( "<div id=\"currvmap\"></div>" ).appendTo(mobj);
                     newwin.vMap({
                         type: 5,
@@ -81,6 +83,7 @@
                     $( "#taskslider" ).hide();
                     $( "#tasksliderlabel" ).hide();
                     $( "#tasktrash" ).hide();
+                    $( "#tasknotebutton" ).hide();
                     var newwin = $( "<div id=\"currvmap\"></div>" ).appendTo(mobj);
                     newwin.vMap({
                         type: 0,
@@ -104,6 +107,7 @@
                     $( "#taskslider" ).hide();
                     $( "#tasksliderlabel" ).hide();
                     $( "#tasktrash" ).hide();
+                    $( "#tasknotebutton" ).hide();
                     var newwin = $( "<div id=\"currvmap\"></div>" ).appendTo(mobj);
                     newwin.vMap({
                         type: 4,
@@ -187,6 +191,17 @@
                             $("#fullscreen").tasksScreen();
                         }
                     });
+                $( "<span id=\"tasknotebutton\"><button>Add notes</button></span>").css('float','right').appendTo(bbar).css('height', '32')
+                    .css('background', '#a0b4d2').button({text: false, icons: {primary: "ui-icon-pencil"}}).click(function() {
+                        var donote=true;
+                        $( ".ui-selected", ".tasklist" ).each(function() {
+                            if(donote) {
+                                var item = $.qsglobal.tasks[$("#currtasklist li").index(this)-1];
+                                $("#tasknotes").tasknoteEditScreen({item:item}).dialog("option", "title", "Note for task "+item.name).dialog("open");
+                                donote=false;
+                            }
+                        });
+                    });
                 var obj = $("<div id=\"taskgantt\"></div>").appendTo($(this));
                 obj.addClass("ganttcontainer").css('width', $(window).width()-options.loff).css('height', $(window).height()-options.toff-1-65);
                 
@@ -200,9 +215,77 @@
                     hoff: options.toff,
                     moff: 0,
                     onclick: function(name, ind) {
-                        $( "#task-form" ).taskEditScreen({ind:ind, item:$.qsglobal.tasks[ind]}).dialog( "open" )
+                        $( "#task-form" ).taskEditScreen({ind:ind, item:$.qsglobal.tasks[ind]})
                             .dialog("option", "title", name).dialog("open");
                     }
+                });
+            });
+        },
+        tasknoteEditScreen: function(opts) {
+            $( this ).empty();
+            var defaults = {
+                item: null
+            };
+            var options = $.extend(defaults, opts);
+         
+            return this.each(function() {
+                var o =options;
+                var obj = $(this);
+                
+                var wbar = $("<div id=\"wikibar\"></div>").appendTo($(this));
+                wbar.css('width','100%');
+                $("<span id=\"wikibuttons\"></span>").html(
+                    "<input type=\"radio\" id=\"wikiedit\" checked=\"checked\" name=\"wikibuttons\"/><label for=\"wikiedit\">Edit</label>"+
+                    "<input type=\"radio\" id=\"wikiread\" name=\"wikibuttons\"/><label for=\"wikiread\">Read</label>")
+                    .css('float','right').css('padding-right','10px').buttonset().appendTo(wbar);
+                
+                
+                obj.css("padding", "0");
+            
+                var content = $("<div style=\"padding:10px;\"></div>").appendTo(obj);
+                $("<textarea id=\"wikieditarea\" style=\"border-color:#a0b4d2;border-width:2px\" cols=\"120\" rows=\"30\">Enter note here</textarea>").appendTo(content);
+                $("<div id=\"wikireadarea\" style=\"font-size:11px;\">Some text</div>").appendTo(content);
+                
+                $( "#wikieditarea" ).val(o.item.note);
+                $( "#wikieditarea" ).show();
+                $( "#wikireadarea" ).hide();
+                
+                $( "#wikiread" ).button().click(function() {
+                    
+                    $( "#wikireadarea" ).html($( "#wikieditarea" ).val().wiki2html());
+                    $( "#wikieditarea" ).hide();
+                    $( "#wikireadarea" ).show();
+                    MathJax.Hub.Typeset();
+                });
+                $( "#wikiedit" ).button().click(function() {
+                    $( "#wikieditarea" ).show();
+                    $( "#wikireadarea" ).hide();
+                });
+                
+                //$('#markItUp').markItUp(markitupSettings);
+                obj.dialog({
+                    autoOpen: false,
+                    width: 950,
+                    height: 700,
+                    modal: true,
+                    buttons: {
+                        "Save": function() {
+                            o.item.note = $( "#wikieditarea" ).val();
+                            o.item.token=$.qsglobal.session_token;
+                            postjson($.qsglobal.dbaddr+'updatetasks', o.item, function(data) {
+                                if(data.success == "true")
+                                {
+                                    //taskinfo.id = o.item.id;
+                                    //$.qsglobal.tasks.splice(o.ind,1,item);
+                                } else {
+                                    alert("Save failed.")
+                                }
+                            }, false, null);
+                        },
+                        "Exit": function() {
+                            $( this ).dialog( "close" );
+                        }
+                    },                  
                 });
             });
         },
@@ -410,6 +493,7 @@
                                 friday:friday.val(),
                                 saturday:saturday.val(),
                                 active:active.val(),
+                                note:"==="+name+"===",
                                 id:-1
                             };
                             if(o.ind==-1) {
@@ -430,6 +514,7 @@
                                 }, false, null);
                             } else {
                                 taskinfo.id = o.item.id;
+                                taskinfo.note = o.item.note;
                                 postjson($.qsglobal.dbaddr+'updatetasks', taskinfo, function(data) {
                                     if(data.success == "true")
                                     {

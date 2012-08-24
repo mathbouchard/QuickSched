@@ -23,6 +23,17 @@
     border-bottom-width: 1px;
 }
 
+#wikibar {
+    /*padding: 15px 15px 0px 10px;*/
+    padding: 10px 0 10px 0;
+    background: transparent;
+    height: 35px;
+    width: 100%;
+    border-bottom: solid;
+    border-bottom-color: #999;
+    border-bottom-width: 1px;
+}
+
 #task-edit .ui-state-default {
     background: #fff;
     color: #333;
@@ -46,6 +57,21 @@
     border-width: 1px;
 }
 #taskbar .ui-state-active {
+    /*background: #95a0ff;*/
+    background: #a0b4d2;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
+}
+
+#wikibar .ui-state-default {
+    background: #fff;
+    color: #333;
+    border: solid;
+    border-color: #333;
+    border-width: 1px;
+}
+#wikibar .ui-state-active {
     /*background: #95a0ff;*/
     background: #a0b4d2;
     border: solid;

@@ -96,6 +96,7 @@
     box-shadow: 0 1px 3px rgba(34,25,25,0.4);
     -moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
     -webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+    border-radius: 5px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     text-align:center;
@@ -125,6 +126,7 @@
     left: 0px;
     width: 70px;
     height: 70px;
+    border-radius: 5px 0px 0px 5px;
     -moz-border-radius:5px 0px 0px 5px;
     -webkit-border-radius:5px 0px 0px 5px;
 }

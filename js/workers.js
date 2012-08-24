@@ -292,7 +292,7 @@
                 ulist.selectable({ filter: "li", cancel: ".ui-selected" });
                 
                 var leaveind = 0;
-                if($.qsglobal.leaves != null)
+                if(options.ind != -1 && $.qsglobal.leaves != null)
                 {
                     $.each($.qsglobal.leaves, function(key,val) {
                         if(val.workerid == options.item.id) {

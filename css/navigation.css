@@ -26,7 +26,11 @@ body {
 }
 
 .vmap-hover {
-    outline: #a0b4d2 solid 40px;
+    outline: -webkit-focus-ring-color auto 40px;
+    /*border: solid 1px #CCC;
+	-moz-box-shadow: 10px 10px 15px #999;
+	-webkit-box-shadow: 10px 10px 15px #999;
+        box-shadow: 10px 10px 15px #999;*/
 }
 
 .ui-dialog {
@@ -271,7 +275,6 @@ body {
 }
 #maintabs {
     position: relative;
-    padding-left: 0px;
     background: transparent;
     padding:0;
     margin: 0;
@@ -317,11 +320,19 @@ body {
 #maintabs .ui-state-default a {
     /*color: #404040;*/
     color: #eee;
+    width: 82px;
+    padding: 10px 0 10px 0;
+    margin: 0;
+    overflow: hidden;
 }
+#maintabs .ui-state-default a img{
+    padding: 0 0 0 27px;
+}
+
 #maintabs .ui-state-active a {
     /*color: #000;*/
     color: #fff;
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 .mainpanel {

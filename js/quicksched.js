@@ -22,10 +22,11 @@ jQuery(document).ready(function() {
     $.qsglobal.isfullscreen = false;
     $.qsglobal.dbaddr = "https://localhost:8443/RestSchedWS/qsdata/"; 
     
-    $.qsglobal.session_token = null
+    $.qsglobal.session_token = null;
     $.qsglobal.username = "";
     $.qsglobal.waitobj = "";
 
+    //domatjax();
     
     $( "#fullscreen" ).hide();
     $( "#maintabs" ).tabs();
