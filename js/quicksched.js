@@ -15,6 +15,9 @@ jQuery(document).ready(function() {
     $.qsglobal.resources = null;
     $.qsglobal.tags = null;
     $.qsglobal.maps = null;
+    $.qsglobal.breaks = null;
+    $.qsglobal.leaves = null;
+    $.qsglobal.demands = null;
     $.qsglobal.solver = null;
     $.qsglobal.solution = null;
     $.qsglobal.settings = null;
@@ -25,8 +28,6 @@ jQuery(document).ready(function() {
     $.qsglobal.session_token = null;
     $.qsglobal.username = "";
     $.qsglobal.waitobj = "";
-
-    //domatjax();
     
     $( "#fullscreen" ).hide();
     $( "#maintabs" ).tabs();
@@ -38,4 +39,5 @@ jQuery(document).ready(function() {
     $( "#dologout" ).button().click(function() { logout(); });  
     initLogin();
     setTimeout(function() { myresize(); }, 100);
+    //setTimeout(function() { createproblem(); }, 900);
 });

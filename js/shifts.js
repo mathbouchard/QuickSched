@@ -591,9 +591,10 @@ function getshiftsdata(done) {
         if(data != null)
             $.qsglobal.shifts = data.slice();
     }, true, done);
+    $.qsglobal.breaks = null;
     var breakinfo = {token:$.qsglobal.session_token};
     postjson($.qsglobal.dbaddr+'getbreaks', breakinfo, function(data) {
         if(data != null)
             $.qsglobal.breaks = data.slice();
-    }, true, done);
+    }, true, null);
 }

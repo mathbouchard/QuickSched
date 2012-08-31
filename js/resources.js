@@ -147,7 +147,7 @@
             
                 if($.qsglobal.resources != null)
                 {
-                    temp = $( "<li></li>" ).html('<img src="img/plus.png"></img><div class="rblocktext">Add a new tag</div>').addClass("rblock")
+                    temp = $( "<li></li>" ).html('<img src="img/plus.png"></img><div class="rblocktext">Add a new resource</div>').addClass("rblock")
                         .click( function() { $( "#resource-form" ).resourceEditScreen().dialog( "open" );}).addClass("raddblock").attr("resourceid", -1);
                     ulist.append(temp);
                     $.each($.qsglobal.resources, function(key,val) {

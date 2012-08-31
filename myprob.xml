@@ -1,0 +1,314 @@
+<solution>
+ <numeric>
+  <under length="14505" cost="100"/>
+  <over length="0" cost="10"/>
+  <transitions number="0" cost="15"/>
+  <seed>0</seed>
+ </numeric>
+ <activitytype id="0">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "45" max = "285"/>
+  </timeconstraints>
+  <step value="-1" begin="270" length="120"/>
+  <step value="-1" begin="675" length="255"/>
+  <step value="-1" begin="990" length="105"/>
+  <step value="-2" begin="690" length="165"/>
+  <step value="-2" begin="915" length="15"/>
+  <step value="-2" begin="1035" length="15"/>
+  <step value="-3" begin="720" length="120"/>
+  <step value="-4" begin="720" length="30"/>
+ </activitytype>
+ <activitytype id="1">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "90" max = "240"/>
+  </timeconstraints>
+  <step value="-1" begin="240" length="195"/>
+  <step value="-1" begin="555" length="360"/>
+  <step value="-1" begin="1080" length="150"/>
+  <step value="-2" begin="345" length="45"/>
+  <step value="-2" begin="600" length="120"/>
+  <step value="-2" begin="750" length="60"/>
+  <step value="-2" begin="840" length="45"/>
+  <step value="-3" begin="615" length="105"/>
+  <step value="-4" begin="630" length="15"/>
+  <step value="-4" begin="660" length="30"/>
+ </activitytype>
+ <activitytype id="2">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "45" max = "225"/>
+  </timeconstraints>
+  <step value="-1" begin="360" length="540"/>
+  <step value="-1" begin="930" length="195"/>
+  <step value="-2" begin="390" length="150"/>
+  <step value="-2" begin="570" length="45"/>
+  <step value="-2" begin="645" length="120"/>
+  <step value="-2" begin="840" length="45"/>
+  <step value="-2" begin="945" length="150"/>
+  <step value="-3" begin="390" length="60"/>
+  <step value="-3" begin="465" length="45"/>
+  <step value="-3" begin="645" length="15"/>
+  <step value="-3" begin="675" length="75"/>
+  <step value="-3" begin="855" length="30"/>
+  <step value="-3" begin="1050" length="15"/>
+  <step value="-4" begin="720" length="30"/>
+ </activitytype>
+ <activitytype id="3">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "75" max = "255"/>
+  </timeconstraints>
+  <step value="-1" begin="390" length="465"/>
+  <step value="-1" begin="900" length="150"/>
+  <step value="-1" begin="1305" length="30"/>
+  <step value="-2" begin="555" length="75"/>
+  <step value="-2" begin="660" length="150"/>
+ </activitytype>
+ <activitytype id="4">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "45" max = "210"/>
+  </timeconstraints>
+  <step value="-1" begin="120" length="600"/>
+  <step value="-1" begin="885" length="195"/>
+  <step value="-1" begin="1095" length="105"/>
+  <step value="-2" begin="270" length="120"/>
+  <step value="-2" begin="555" length="105"/>
+  <step value="-2" begin="690" length="30"/>
+  <step value="-2" begin="900" length="30"/>
+  <step value="-2" begin="1020" length="15"/>
+  <step value="-3" begin="570" length="30"/>
+  <step value="-3" begin="645" length="15"/>
+ </activitytype>
+ <activitytype id="5">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "150" max = "285"/>
+  </timeconstraints>
+  <step value="-1" begin="450" length="240"/>
+  <step value="-1" begin="705" length="195"/>
+  <step value="-1" begin="975" length="45"/>
+  <step value="-1" begin="1095" length="195"/>
+  <step value="-2" begin="450" length="225"/>
+  <step value="-2" begin="720" length="120"/>
+  <step value="-2" begin="1170" length="105"/>
+  <step value="-3" begin="540" length="135"/>
+  <step value="-3" begin="750" length="75"/>
+  <step value="-4" begin="585" length="30"/>
+  <step value="-4" begin="750" length="75"/>
+  <step value="-5" begin="780" length="30"/>
+ </activitytype>
+ <activitytype id="6">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "60" max = "270"/>
+  </timeconstraints>
+  <step value="-1" begin="510" length="75"/>
+  <step value="-1" begin="600" length="375"/>
+  <step value="-2" begin="630" length="90"/>
+  <step value="-2" begin="795" length="180"/>
+  <step value="-3" begin="645" length="15"/>
+  <step value="-3" begin="915" length="30"/>
+ </activitytype>
+ <activitytype id="7">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "105" max = "255"/>
+  </timeconstraints>
+  <step value="-1" begin="120" length="45"/>
+  <step value="-1" begin="375" length="60"/>
+  <step value="-1" begin="645" length="525"/>
+  <step value="-1" begin="1230" length="60"/>
+  <step value="-2" begin="660" length="150"/>
+  <step value="-2" begin="915" length="75"/>
+  <step value="-2" begin="1035" length="105"/>
+  <step value="-3" begin="660" length="90"/>
+  <step value="-3" begin="945" length="15"/>
+  <step value="-3" begin="1095" length="15"/>
+  <step value="-4" begin="690" length="30"/>
+ </activitytype>
+ <activitytype id="8">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "150" max = "270"/>
+  </timeconstraints>
+  <step value="-1" begin="165" length="75"/>
+  <step value="-1" begin="345" length="360"/>
+  <step value="-1" begin="720" length="105"/>
+  <step value="-1" begin="975" length="195"/>
+  <step value="-2" begin="435" length="165"/>
+  <step value="-2" begin="645" length="45"/>
+  <step value="-2" begin="750" length="45"/>
+  <step value="-3" begin="750" length="45"/>
+ </activitytype>
+ <activitytype id="9">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "150" max = "285"/>
+  </timeconstraints>
+  <step value="-1" begin="300" length="60"/>
+  <step value="-1" begin="420" length="225"/>
+  <step value="-1" begin="660" length="30"/>
+  <step value="-1" begin="705" length="105"/>
+  <step value="-1" begin="870" length="300"/>
+  <step value="-1" begin="1200" length="30"/>
+  <step value="-2" begin="435" length="30"/>
+  <step value="-2" begin="525" length="15"/>
+  <step value="-2" begin="570" length="60"/>
+  <step value="-2" begin="750" length="45"/>
+  <step value="-2" begin="885" length="120"/>
+  <step value="-3" begin="600" length="15"/>
+  <step value="-3" begin="765" length="15"/>
+  <step value="-3" begin="885" length="75"/>
+  <step value="-4" begin="915" length="45"/>
+ </activitytype>
+ <activitytype id="10">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "150" max = "225"/>
+  </timeconstraints>
+  <step value="-1" begin="165" length="450"/>
+  <step value="-1" begin="675" length="105"/>
+  <step value="-1" begin="825" length="345"/>
+  <step value="-2" begin="345" length="15"/>
+  <step value="-2" begin="465" length="105"/>
+  <step value="-2" begin="690" length="30"/>
+  <step value="-2" begin="840" length="300"/>
+  <step value="-3" begin="540" length="30"/>
+  <step value="-3" begin="840" length="105"/>
+  <step value="-4" begin="840" length="75"/>
+  <step value="-5" begin="855" length="60"/>
+  <step value="-6" begin="855" length="15"/>
+ </activitytype>
+ <activitytype id="11">
+  <timeconstraints>
+   <window begin="0" length="1440" min = "135" max = "255"/>
+  </timeconstraints>
+  <step value="-1" begin="450" length="855"/>
+  <step value="-2" begin="630" length="75"/>
+  <step value="-2" begin="780" length="315"/>
+  <step value="-2" begin="1125" length="60"/>
+  <step value="-3" begin="630" length="45"/>
+  <step value="-3" begin="795" length="120"/>
+  <step value="-3" begin="960" length="30"/>
+  <step value="-3" begin="1020" length="60"/>
+  <step value="-4" begin="810" length="90"/>
+  <step value="-5" begin="855" length="30"/>
+ </activitytype>
+ <employee id="0">
+  <qualifications>0 1 2 5 6 7 8 9 10 11 </qualifications>
+  <piece id="0" begin="570" length="240"/>
+  <piece id="1" begin="840" length="345"/>
+ </employee>
+ <employee id="1">
+  <qualifications>1 4 5 6 11 9 </qualifications>
+  <piece id="2" begin="450" length="270"/>
+  <piece id="3" begin="750" length="330"/>
+ </employee>
+ <employee id="2">
+  <qualifications>0 2 3 4 5 7 10 </qualifications>
+  <piece id="4" begin="450" length="270"/>
+  <piece id="5" begin="750" length="315"/>
+ </employee>
+ <employee id="3">
+  <qualifications>0 1 3 4 5 6 7 9 10 </qualifications>
+  <piece id="6" begin="525" length="285"/>
+  <piece id="7" begin="840" length="270"/>
+ </employee>
+ <employee id="4">
+  <qualifications>0 1 2 4 9 11 </qualifications>
+  <piece id="8" begin="570" length="240"/>
+  <piece id="9" begin="840" length="330"/>
+ </employee>
+ <employee id="5">
+  <qualifications>0 2 4 5 6 7 9 </qualifications>
+  <piece id="10" begin="660" length="300"/>
+  <piece id="11" begin="990" length="300"/>
+ </employee>
+ <employee id="6">
+  <qualifications>1 2 5 6 7 8 9 </qualifications>
+  <piece id="12" begin="165" length="270"/>
+  <piece id="13" begin="465" length="330"/>
+ </employee>
+ <employee id="7">
+  <qualifications>0 3 4 9 10 </qualifications>
+  <piece id="14" begin="555" length="255"/>
+  <piece id="15" begin="840" length="300"/>
+ </employee>
+ <employee id="8">
+  <qualifications>0 4 8 9 10 11 </qualifications>
+  <piece id="16" begin="120" length="270"/>
+  <piece id="17" begin="420" length="285"/>
+ </employee>
+ <employee id="9">
+  <qualifications>1 4 5 9 11 </qualifications>
+  <piece id="18" begin="630" length="255"/>
+  <piece id="19" begin="915" length="315"/>
+ </employee>
+ <employee id="10">
+  <qualifications>0 2 3 5 6 7 9 10 </qualifications>
+  <piece id="20" begin="120" length="240"/>
+  <piece id="21" begin="390" length="330"/>
+ </employee>
+ <employee id="11">
+  <qualifications>3 4 5 7 11 </qualifications>
+  <piece id="22" begin="660" length="330"/>
+  <piece id="23" begin="1020" length="315"/>
+ </employee>
+ <employee id="12">
+  <qualifications>0 2 4 5 6 8 9 10 9 </qualifications>
+  <piece id="24" begin="435" length="255"/>
+  <piece id="25" begin="720" length="330"/>
+ </employee>
+ <employee id="13">
+  <qualifications>0 1 3 5 6 7 9 </qualifications>
+  <piece id="26" begin="705" length="300"/>
+  <piece id="27" begin="1035" length="255"/>
+ </employee>
+ <employee id="14">
+  <qualifications>1 2 4 5 6 7 8 10 </qualifications>
+  <piece id="28" begin="375" length="285"/>
+  <piece id="29" begin="690" length="300"/>
+ </employee>
+ <employee id="15">
+  <qualifications>0 1 2 5 6 8 10 11 </qualifications>
+  <piece id="30" begin="270" length="300"/>
+  <piece id="31" begin="600" length="300"/>
+ </employee>
+ <employee id="16">
+  <qualifications>0 1 2 4 6 7 8 10 11 </qualifications>
+  <piece id="32" begin="345" length="270"/>
+  <piece id="33" begin="645" length="315"/>
+ </employee>
+ <employee id="17">
+  <qualifications>2 3 4 5 6 8 9 11 </qualifications>
+  <piece id="34" begin="300" length="315"/>
+  <piece id="35" begin="645" length="270"/>
+ </employee>
+ <employee id="18">
+  <qualifications>0 1 2 5 6 9 10 </qualifications>
+  <piece id="36" begin="555" length="270"/>
+  <piece id="37" begin="855" length="285"/>
+ </employee>
+ <employee id="19">
+  <qualifications>1 3 6 7 8 10 5 </qualifications>
+  <piece id="38" begin="555" length="270"/>
+  <piece id="39" begin="855" length="315"/>
+ </employee>
+ <employee id="20">
+  <qualifications>0 4 6 8 9 </qualifications>
+  <piece id="40" begin="345" length="270"/>
+  <piece id="41" begin="645" length="315"/>
+ </employee>
+ <employee id="21">
+  <qualifications>0 1 2 3 4 7 9 10 11 </qualifications>
+  <piece id="42" begin="270" length="300"/>
+  <piece id="43" begin="600" length="270"/>
+ </employee>
+ <employee id="22">
+  <qualifications>0 1 2 3 4 5 7 8 11 </qualifications>
+  <piece id="44" begin="345" length="255"/>
+  <piece id="45" begin="630" length="300"/>
+ </employee>
+ <employee id="23">
+  <qualifications>0 1 2 3 4 6 7 8 9 11 </qualifications>
+  <piece id="46" begin="645" length="285"/>
+  <piece id="47" begin="960" length="315"/>
+ </employee>
+ <employee id="24">
+  <qualifications>2 3 4 6 7 9 10 </qualifications>
+  <piece id="48" begin="570" length="270"/>
+  <piece id="49" begin="870" length="300"/>
+ </employee>
+</solution>

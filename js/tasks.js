@@ -243,7 +243,7 @@
                 obj.css("padding", "0");
             
                 var content = $("<div style=\"padding:10px;\"></div>").appendTo(obj);
-                $("<textarea id=\"wikieditarea\" style=\"border-color:#a0b4d2;border-width:2px\" cols=\"120\" rows=\"30\">Enter note here</textarea>").appendTo(content);
+                $("<textarea id=\"wikieditarea\" style=\"height:70%;border-color:#a0b4d2;border-width:2px\" cols=\"120\" rows=\"30\">Enter note here</textarea>").appendTo(content);
                 $("<div id=\"wikireadarea\" style=\"font-size:11px;\">Some text</div>").appendTo(content);
                 
                 $( "#wikieditarea" ).val(o.item.note);
@@ -266,7 +266,7 @@
                 obj.dialog({
                     autoOpen: false,
                     width: 950,
-                    height: 700,
+                    //height: 680,
                     modal: true,
                     buttons: {
                         "Save": function() {
@@ -275,12 +275,32 @@
                             postjson($.qsglobal.dbaddr+'updatetasks', o.item, function(data) {
                                 if(data.success == "true")
                                 {
-                                    //taskinfo.id = o.item.id;
-                                    //$.qsglobal.tasks.splice(o.ind,1,item);
+                                    
+                                    var link = "mailto:";
+                                    var widmap = {};
+                                    if($.qsglobal.maps != null) {
+                                        $.each($.qsglobal.maps, function(key,val) {
+                                            if(val.type == 0 && val.id2 == o.item.id) {
+                                                widmap[val.id1] = true;
+                                            }
+                                        });
+                                    }
+                                    if($.qsglobal.workers != null) {
+                                        $.each($.qsglobal.workers, function(key,val) {
+                                            if(widmap[val.id] == true && val.email != null && val.email != "") {
+                                                link+=encodeURIComponent(val.email+",");
+                                            }
+                                        });
+                                    }
+                                    /*link = link + "?subject=" + encodeURIComponent("Q-opt.com: The note for task "+o.item.name+" has been updated")
+                                        + "&body=";
+                                    link = link+encodeURIComponent($( "#wikieditarea" ).val().substring(0,1000-link.length)+"\n...");
+                                    window.open(link);*/
                                 } else {
                                     alert("Save failed.")
                                 }
                             }, false, null);
+                            
                         },
                         "Exit": function() {
                             $( this ).dialog( "close" );
@@ -352,6 +372,71 @@
                     .css("float","left").css("border", "solid").css("border-color", "#aaa").css("border-width", "0px 0px 0px 0px").appendTo( type_log );
                 var rdiv = $("<div id=\"we-right\"></div>").css("width", "48%").css("float","left")
                     .css("height", "100%").appendTo( type_log );
+                var bdiv = $("<div id=\"we-bottom\"></div>").css("width", "100%").css("padding", 0).css("margin", 0).css("float","left")
+                    .css("border", "solid").css("border-color", "#aaa").css("border-width", "0px 0px 0px 0px").appendTo( type_log );
+                
+                var demanddiv = $("<div></div>").addClass("demanddiv").appendTo(bdiv);
+                var bbar = $("<div id=\"demandbar\"></div>").appendTo(demanddiv).css("padding", "5px 0px 0 0px")
+                bbar.css('width','100%').css('height','32px');
+                $("<div></div>").html("Demands").css('padding', '5px 0 0 10px').css('margin-right','20px').css('float','left').appendTo(bbar);
+                
+                $( "<span><button id=\"demandadd\"></button></span>").css('float','left').appendTo(bbar).css('height', '32').css('background', '#a0b4d2')
+                    .button({text: false, icons: {primary: "ui-icon-plusthick"}}).click(function() {
+                        $( "#demand-form" ).demandEditScreen({tind: o.ind, titem: o.item}).dialog( "open" );
+                    });
+                    
+                var ordermap = [];
+                
+                $( "<span><button id=\"demandtrash\"></button></span>").css('float','left').appendTo(bbar).css('height', '32')
+                    .css('background', '#a0b4d2').button({text: false, icons: {primary: "ui-icon-trash"}}).click(function() {
+                        rem = [];
+                        $( ".ui-selected", ".demandlist" ).each(function() {
+                            var ind = $("#currdemandlist li").index(this);
+                            rem.push(ind);
+                            var sub=0;
+                            $.each(rem, function(key,val) {
+                                if(val<ind) {
+                                    sub++;
+                                }
+                            });
+                            ind=ind-sub;
+                            var demandinfo = {token:$.qsglobal.session_token, id:$( this ).attr( "demandid" )};
+                            postjson($.qsglobal.dbaddr+'deldemands', demandinfo, function(data) {
+                                if(data.success == "true")
+                                {
+                                    $.qsglobal.demands.splice(ordermap[ind],1);
+                                } else {
+                                    alert("Delete failed.");
+                                }
+                            }, false, null);
+			});
+                        obj.taskEditScreen({ind:options.ind, item:options.item});
+                    });
+                
+                var ulist = $('<ul class="demandlist" id="currdemandlist"></ul>').css('height','98%').css('overflow-y', 'scroll').appendTo( demanddiv );
+                ulist.selectable({ filter: "li", cancel: ".ui-selected" });
+                
+                var demandind = 0;
+                if($.qsglobal.demands != null && options.item != null)
+                {
+                    $.each($.qsglobal.demands, function(key,val) {
+                        if(val.taskid == options.item.id) {
+                            temp = $( "<li></li>" ).html('</div><div class="qstabletag">Start time</div><div class="qstableval">'+val.starttime
+                                +'</div><div class="qstabletag">Duration</div><div class="qstableval">'+val.duration+'</div>'
+                                +'</div><div class="qstabletag">Qty</div><div class="qstableval">'+val.quantity+'</div>'
+                                +'</div><div class="qstabletag">Time needed</div><div class="qstableval">'+val.timeneeded+'</div>'
+                                ).addClass("qstableline").attr("demandid", val.id).dblclick( function() {
+                                    $( "#demand-form" ).demandEditScreen({ind: key, item: val, tind: o.ind, titem: o.item}).dialog( "open" );
+                                });
+                            ulist.append(temp);
+                            ordermap.push(demandind);
+                        }
+                        demandind++;
+                    });
+                }
+                
+                if(options.item == null)
+                    bdiv.hide();
                 
                 ldiv.append($('<form></form>').html(
                     (o.ind != -1 && o.item.active=="0"?
@@ -544,6 +629,109 @@
                  
             });
         },
+        demandEditScreen: function(opts) {          
+            $( this ).empty();
+            
+            //Settings list and the default values
+            var defaults = {
+                ind: -1,
+                tind: -1,
+                item: null,
+                titem: null
+            };
+            var options = $.extend(defaults, opts);
+         
+            return this.each(function() {
+                var o =options;
+                var obj = $(this);
+                
+                if(o.ind == -1) {
+                    o.item = {}
+                    o.item.starttime = "";
+                    o.item.duration = "";
+                    o.item.quantity = "";
+                    o.item.timeneeded = "";
+                    o.item.token = $.qsglobal.session_token;
+                }
+                
+                var type_log = $('<div id="demand-edit"><div>').appendTo( obj );
+                type_log.append($('<p class="validateTips">Fill the required fields</p>'));
+                type_log.append($('<form></form>').html(
+                    '<fieldset>'+
+                    '<label style="display: inline-block; width: 15%; height: 25px;" for="demandstarttime">Start time</label>'+
+                    '<input type="text" id="demandstarttime" value="'+o.item.starttime+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
+                    '<label style="display: inline-block; width: 15%; height: 25px;" for="demandduration">Duration</label>'+
+                    '<input type="text" id="demandduration" value="'+o.item.duration+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
+                    '<label style="display: inline-block; width: 15%; height: 25px;" for="demandquantity">Quantity</label>'+
+                    '<input type="text" id="demandquantity" value="'+o.item.quantity+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
+                    '<label style="display: inline-block; width: 15%; height: 25px;" for="demandtimeneeded">Time needed</label>'+
+                    '<input type="text" id="demandtimeneeded" value="'+o.item.timeneeded+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
+                    '</fieldset>'));
+                        
+                var starttime = $( "#demandstarttime" ),
+                    duration = $( "#demandduration" ),
+                    quantity = $( "#demandquantity" ),
+                    timeneeded = $( "#demandtimeneeded" ),
+                    allFields = $( [] ).add( starttime ).add( duration ).add( quantity ).add( timeneeded ),
+                    tips = $( ".validateTips" );
+                 
+                obj.dialog({
+		    autoOpen: false,
+		    width: 750,
+		    modal: true,
+		    buttons: {
+                        "Save": function() {
+                            var bValid = true;
+                            
+                            allFields.removeClass( "ui-state-error" );
+                            
+                            var demandinfo = {
+                                token:$.qsglobal.session_token,
+                                starttime:starttime.val(),
+                                duration:duration.val(),
+                                quantity:quantity.val(),
+                                timeneeded:timeneeded.val(),
+                                taskid:o.titem.id,
+                                id:""
+                            };
+                            if(o.ind==-1) {
+                                demandinfo.id = -1;
+                                postjson($.qsglobal.dbaddr+'adddemands', demandinfo, function(data) {
+                                    if(data.success == "true")
+                                    {
+                                        demandinfo.id = data.id;
+                                        $.qsglobal.demands.push(demandinfo);
+                                        $("#task-form").taskEditScreen({ind:o.tind, item:o.titem} );
+                                    } else {
+                                        alert("Save failed.")
+                                    }
+                                }, false, null);
+                            } else {
+                                demandinfo.id = o.item.id;
+                                postjson($.qsglobal.dbaddr+'updatedemands', demandinfo, function(data) {
+                                    if(data.success == "true")
+                                    {
+                                        demandinfo.id = o.item.id;
+                                        $.qsglobal.demands.splice(o.ind,1,demandinfo);
+                                        $("#task-form").taskEditScreen({ind:o.tind, item:o.titem} );
+                                    } else {
+                                        alert("Save failed.")
+                                    }
+                                }, false, null);
+                            }
+                            $( this ).dialog( "close" );
+                        },
+                        Cancel: function() {
+                            $( this ).dialog( "close" );
+                        }
+                    },
+                    close: function() {
+                        allFields.val( "" ).removeClass( "ui-state-error" );
+                    }
+		});
+                 
+            });
+        },
         taskresEditScreen: function(opts) {          
             $( this ).empty();
             
@@ -641,4 +829,10 @@ function gettasksdata(done) {
         if(data != null)
             $.qsglobal.tasks = data.slice();
     }, true, done);
+    //$.qsglobal.demands = null;
+    var demandinfo = {token:$.qsglobal.session_token};
+    postjson($.qsglobal.dbaddr+'getdemands', demandinfo, function(data) {
+        if(data != null)
+            $.qsglobal.demands = data.slice();
+    }, true, null);
 }

@@ -676,10 +676,10 @@ function getworkersdata(done) {
         if(data != null)
             $.qsglobal.workers = data.slice();
     }, true, done);
-    $.qsglobal.workers = null;
+    $.qsglobal.leaves = null;
     var leaveinfo = {token:$.qsglobal.session_token};
     postjson($.qsglobal.dbaddr+'getleaves', leaveinfo, function(data) {
         if(data != null)
             $.qsglobal.leaves = data.slice();
-    }, true, done);
+    }, true, null);
 }
