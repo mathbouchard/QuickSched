@@ -300,7 +300,7 @@ function onLoad(xmlData, strStatus)
             +color[emp.attr('id')%4]+color[emp.attr('id')%4];
         workerinfo.firstname = numbertext[(Math.floor(emp.attr('id')/10))%10];
         workerinfo.lastname = numbertext[emp.attr('id')%10];
-        workerinfo.code = '"W"+emp.attr('id');
+        workerinfo.code = "W"+emp.attr('id');
         workerinfo.active = "1";
         workerinfo.id = wid;
         workerinfo.token = $.qsglobal.session_token;
