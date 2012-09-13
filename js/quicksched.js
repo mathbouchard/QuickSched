@@ -23,7 +23,7 @@ jQuery(document).ready(function() {
     $.qsglobal.settings = null;
     $.qsglobal.mapid = null;
     $.qsglobal.isfullscreen = false;
-    $.qsglobal.dbaddr = "https://localhost:8443/RestSchedWS/qsdata/"; 
+    $.qsglobal.dbaddr = "https://"+window.location.host+"/RestSchedWS/qsdata/"; 
     
     $.qsglobal.session_token = null;
     $.qsglobal.username = "";
