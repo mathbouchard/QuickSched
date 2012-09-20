@@ -3,7 +3,7 @@
  *
  * Copyright 2012, Mathieu Bouchard
  * Licensed under the GPL Version 3 license.
- * http://q-opt.com
+ * http://skdit.com
  *
  */
 

@@ -3,7 +3,7 @@
  *
  * Copyright 2012, Mathieu Bouchard
  * Licensed under the GPL Version 3 license.
- * http://q-opt.com
+ * http://skdit.com
  *
  */
 
@@ -26,10 +26,10 @@
                 bbar.css('width',$(window).width()-options.loff-20);
                 
                 $("<span id=\"resradioassign\"></span>").html(
-                    "<input type=\"radio\" id=\"resradioedit\" checked=\"checked\" name=\"resradioassign\"/><label for=\"resradioedit\">Edit</label>"+
-                    "<input type=\"radio\" id=\"resradiotag\" name=\"resradioassign\"/><label for=\"resradiotag\">Tags</label>"+
-                    "<input type=\"radio\" id=\"resradioworker\" name=\"resradioassign\"/><label for=\"resradioworker\">Workers</label>"+
-                    "<input type=\"radio\" id=\"resradiotask\" name=\"resradioassign\"/><label for=\"resradiotask\">Tasks</label>")
+                    "<input type=\"radio\" id=\"resradioedit\" checked=\"checked\" name=\"resradioassign\"/><label for=\"resradioedit\">"+tr("Edit")+"</label>"+
+                    "<input type=\"radio\" id=\"resradiotag\" name=\"resradioassign\"/><label for=\"resradiotag\">"+tr("Tags")+"</label>"+
+                    "<input type=\"radio\" id=\"resradioworker\" name=\"resradioassign\"/><label for=\"resradioworker\">"+tr("Workers")+"</label>"+
+                    "<input type=\"radio\" id=\"resradiotask\" name=\"resradioassign\"/><label for=\"resradiotask\">"+tr("Tasks")+"</label>")
                     .css('float','left').buttonset().appendTo(bbar);
                 
                 $( "#resradioedit" ).button().click(function() {
@@ -132,12 +132,12 @@
                                 if(data.success == "true") {
                                     $.qsglobal.resources.splice(ind,1);
                                 } else {
-                                    alert("Delete failed.");
+                                    alert(tr("Failed to delete"));
                                 }
                             }, false, null);
 			});
                         if(!$.qsglobal.isfullscreen) {
-                            $("#resources").resourcesScreen({loff: 83, toff: 101});
+                            $("#normalscreen").resourcesScreen({loff: 83, toff: 101});
                         } else {
                             $("#fullscreen").resourcesScreen();
                         }
@@ -147,8 +147,8 @@
             
                 if($.qsglobal.resources != null)
                 {
-                    temp = $( "<li></li>" ).html('<img src="img/plus.png"></img><div class="rblocktext">Add a new resource</div>').addClass("rblock")
-                        .click( function() { $( "#resource-form" ).resourceEditScreen().dialog( "open" );}).addClass("raddblock").attr("resourceid", -1);
+                    temp = $( "<li></li>" ).html('<img src="img/plus.png"></img><div class="rblocktext">'+tr("Add a new resource")+'</div>').addClass("rblock")
+                        .click( function() { $( "#resource-form" ).attr("title", tr("New resource")).resourceEditScreen().dialog( "open" );}).addClass("raddblock").attr("resourceid", -1);
                     ulist.append(temp);
                     $.each($.qsglobal.resources, function(key,val) {
                         
@@ -164,117 +164,25 @@
         },
         resourceEditScreen: function(opts) {          
             $( this ).empty();
-            
-            //Settings list and the default values
             var defaults = {
                 ind: -1,
                 item: null
             };
-            var options = $.extend(defaults, opts);
-         
+            $( this ).empty();
+            var o = $.extend(defaults, opts);
+            o.reload = function () { showresources(); };
+            o.savefunction = function(o) {savetodb({jsonadd: "addresources", jsonupdate: "updateresources", globalobj: $.qsglobal.resources}, o);};
+            o.tr = tr
+            o.prefix="redit-";;
+            o.idname = "resource-edit";
+            o.fields = [
+                {name: "Color", itemname: "color", type: "color", defval: "#cc3333", col: 1},
+                {name: "Resource", itemname: "name", type: "text", defval: "", col: 1},
+                {name: "Description", itemname: "description", type: "time", defval: "", col: 1},
+                {name: "Capacity", itemname: "capacity", type: "numeric", defval: "", col: 1}
+            ];
             return this.each(function() {
-                var o =options;
-                var obj = $(this);
-                //$(this).css('background', '#a0b4d2');
-                
-                
-                var inname = '',
-                    indesc = '',
-                    incolor = '#cc3333',
-                    incapacity = '1';
-                if(o.ind != -1) {
-                   inname = o.item.name;
-                   indesc = o.item.description;
-                   incolor = o.item.color;
-                   incapacity = o.item.capacity;
-                }
-                var type_log = $('<div id="resource-edit"><div>').appendTo( obj );
-                type_log.append($('<p class="validateTips">Fill the required fields</p>'));
-                type_log.append($('<form></form>').html(
-                    '<fieldset>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="rescolor">Color</label>'+
-                    '<input style="display: inline-block;" id="rescolor" value="'+incolor+'"><br/>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="resname">Tag</label>'+
-                    '<input type="text" id="resname" value="'+inname+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="resdesc">Description</label>'+
-                    '<input type="text" id="resdesc" value="'+indesc+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%;"/><br />'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="rescapacity">Capacity</label>'+
-                    '<input type="text" id="rescapacity" value="'+incapacity+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%;"/><br />'+
-                    '</fieldset>'));
-                
-                $("#rescolor").simpleColor({
-			border: '1px solid #333333',
-			boxHeight: '25px',
-			displayColorCode: true
-                });
-                
-                var name = $( "#resname" ),
-                    desc = $( "#resdesc" ),
-                    color = $( "#rescolor" ),
-                    capacity = $( "#rescapacity" ),
-                    allFields = $( [] ).add( name ).add( desc ).add( color ).add( capacity ),
-                    tips = $( ".validateTips" );
-                 
-                obj.dialog({
-		    autoOpen: false,
-		    width: 750,
-		    modal: true,
-		    buttons: {
-                        "Save": function() {
-                            var bValid = true;
-                            
-                            allFields.removeClass( "ui-state-error" );
-                            
-                            var resinfo = {token:$.qsglobal.session_token, name:"", description:"", color:"", capacity:"1", id:""};
-                            resinfo.name = name.val();
-                            resinfo.description = desc.val();
-                            resinfo.color = color.val();
-                            resinfo.capacity = capacity.val();
-                            if(o.ind==-1) {
-                                resinfo.id = -1;
-                                postjson($.qsglobal.dbaddr+'addresources', resinfo, function(data) {
-                                    if(data.success == "true")
-                                    {
-                                        resinfo.id = data.id;
-                                        $.qsglobal.resources.push(resinfo);
-                                        if(!$.qsglobal.isfullscreen) {
-                                            $("#resources").resourcesScreen({loff: 83, toff: 101});
-                                        } else {
-                                            $("#fullscreen").resourcesScreen();
-                                        }
-                                    } else {
-                                        alert("Save failed.")
-                                    }
-                                }, false, null);
-                            } else {
-                                resinfo.id = o.item.id;
-                                postjson($.qsglobal.dbaddr+'updateresources', resinfo, function(data) {
-                                    if(data.success == "true")
-                                    {
-                                        resinfo.id = o.item.id;
-                                        $.qsglobal.resources.splice(o.ind,1,resinfo);
-                                        if(!$.qsglobal.isfullscreen) {
-                                            $("#resources").resourcesScreen({loff: 83, toff: 101});
-                                        } else {
-                                            $("#fullscreen").resourcesScreen();
-                                        }
-                                    } else {
-                                        alert("Save failed.")
-                                    }
-                                }, false, null);
-                            }
-                            
-                            $( this ).dialog( "close" );
-                        },
-                        Cancel: function() {
-                            $( this ).dialog( "close" );
-                        }
-                    },
-                    close: function() {
-                        allFields.val( "" ).removeClass( "ui-state-error" );
-                    }
-		});
-                 
+                $(this).qsforms(o);
             });
         }
     });

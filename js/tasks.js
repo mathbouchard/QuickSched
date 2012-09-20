@@ -3,7 +3,7 @@
  *
  * Copyright 2012, Mathieu Bouchard
  * Licensed under the GPL Version 3 license.
- * http://q-opt.com
+ * http://skdit.com
  *
  */
 
@@ -37,15 +37,15 @@
                 var bbar = $("<div id=\"taskbar\"></div>").appendTo($(this));
                 bbar.css('width',$(window).width()-options.loff-20);
                 $("<span id=\"taskradioshow\"></span>").html(
-                    "<input type=\"radio\" id=\"taskradiotask\" checked=\"checked\" name=\"taskradioshow\"/><label for=\"taskradiotask\">Tasks</label>"+
-                    "<input type=\"radio\" id=\"taskradiodemand\" name=\"taskradioshow\"/><label for=\"taskradiodemand\">Demands</label>")
+                    "<input type=\"radio\" id=\"taskradiotask\" checked=\"checked\" name=\"taskradioshow\"/><label for=\"taskradiotask\">"+tr("Tasks")+"</label>"+
+                    "<input type=\"radio\" id=\"taskradiodemand\" name=\"taskradioshow\"/><label for=\"taskradiodemand\">"+tr("Tasks")+"</label>")
                     .css('float','left').buttonset().appendTo(bbar);
                 
                 $("<span id=\"taskradioassign\"></span>").html(
-                    "<input type=\"radio\" id=\"taskradioedit\" checked=\"checked\" name=\"taskradioassign\"/><label for=\"taskradioedit\">Edit</label>"+
-                    "<input type=\"radio\" id=\"taskradiotag\" name=\"taskradioassign\"/><label for=\"taskradiotag\">Tags</label>"+
-                    "<input type=\"radio\" id=\"taskradioworker\" name=\"taskradioassign\"/><label for=\"taskradioworker\">Workers</label>"+
-                    "<input type=\"radio\" id=\"taskradioresource\" name=\"taskradioassign\"/><label for=\"taskradioresource\">Resources</label>")
+                    "<input type=\"radio\" id=\"taskradioedit\" checked=\"checked\" name=\"taskradioassign\"/><label for=\"taskradioedit\">"+tr("Edit")+"</label>"+
+                    "<input type=\"radio\" id=\"taskradiotag\" name=\"taskradioassign\"/><label for=\"taskradiotag\">"+tr("Tags")+"</label>"+
+                    "<input type=\"radio\" id=\"taskradioworker\" name=\"taskradioassign\"/><label for=\"taskradioworker\">"+tr("Workers")+"</label>"+
+                    "<input type=\"radio\" id=\"taskradioresource\" name=\"taskradioassign\"/><label for=\"taskradioresource\">"+tr("Resources")+"</label>")
                     .css('float','left').buttonset().appendTo(bbar);
                 
                 $( "#taskradioedit" ).button().click(function() {
@@ -117,14 +117,14 @@
                         upobj: $.qsglobal.tasks,
                         upblockclass: 'tblock',
                         uptextclass: 'tblocktext',
-                        downdesc: function(val) {return val.desc+' ('+val.capacity+')';},
+                        downdesc: function(val) {return val.description+' ('+val.capacity+')';},
                         downobj: $.qsglobal.resources,
                         downblockclass: 'tblock',
                         downtextclass: 'tblocktext',
                     });
                 });
                 
-                $("<label id=\"tasksliderlabel\" for=\"taskslider\">Zoom:</label>").css('margin-left',20).css('margin-top',8).css('float','left').appendTo(bbar);
+                $("<label id=\"tasksliderlabel\" for=\"taskslider\">"+tr("Zoom")+":</label>").css('margin-left',20).css('margin-top',8).css('float','left').appendTo(bbar);
                 $("<div id=\"taskslider\"></div>").css('margin-left',10).css('margin-top',10).css('width',100).css('float','left').slider({
                     min: 0.2,
 		    max: 3.0,
@@ -181,14 +181,14 @@
                                 if(data.success == "true") {
                                     $.qsglobal.tasks.splice(ind,1);
                                 } else {
-                                    alert("Delete failed.");
+                                    alert(tr("Failed to delete"));
                                 }
                             }, false, null);
 			});
                         if(!$.qsglobal.isfullscreen) {
-                            $("#tasks").tasksScreen({loff: 83, toff: 101});
+                            $("#normalscreen").tasksScreen({loff: 83, toff: 101});
                         } else {
-                            $("#fullscreen").tasksScreen();
+                            $("#screen").tasksScreen();
                         }
                     });
                 $( "<span id=\"tasknotebutton\"><button>Add notes</button></span>").css('float','right').appendTo(bbar).css('height', '32')
@@ -203,7 +203,8 @@
                         });
                     });
                 var obj = $("<div id=\"taskgantt\"></div>").appendTo($(this));
-                obj.addClass("ganttcontainer").css('width', $(window).width()-options.loff).css('height', $(window).height()-options.toff-1-65);
+                obj.addClass("ganttcontainer").css('width', $(window).width()-options.loff).css('height', $(window).height()-options.toff-1-65)
+                obj.css('overflow-x', 'auto').obj;
                 
                 
                 obj.ganttScreen(
@@ -316,322 +317,57 @@
             var defaults = {
                 ind: -1,
                 item: null
-            };
-            var options = $.extend(defaults, opts);
-         
-            return this.each(function() {
-                var o =options;
-                var obj = $(this);
-                
-                var inname = '',
-                    indescription = '',
-                    incolor = '#cc3333',
-                    intype = '',
-                    inlocationstart = '',
-                    inlocationend = '',
-                    instarttime = '',
-                    induration = '',
-                    inminworkduration = '',
-                    inmaxworkduration = '',
-                    inqty = '';
-                    insunday = '0';
-                    inmonday = '0';
-                    intuesday = '0';
-                    inwednesday = '0';
-                    inthursday = '0';
-                    infriday = '0';
-                    insaturday = '0';
-                    inactive = '0';
-                if(o.ind != -1) {
-                    inname = (o.item.name==null) ? "" : o.item.name;
-                    indescription = (o.item.description==null) ? "" : o.item.description;    
-                    incolor = (o.item.color==null) ? "" : o.item.color; 
-                    intype = (o.item.type==null) ? "" : o.item.type;
-                    inlocationstart = (o.item.locationstart==null) ? "" : o.item.locationstart;
-                    inlocationend = (o.item.locationend==null) ? "" : o.item.locationend;
-                    instarttime = (o.item.starttime==null) ? "" : o.item.starttime;
-                    induration = (o.item.duration==null) ? "" : o.item.duration;
-                    inminworkduration = (o.item.minworkduration==null) ? "" : o.item.minworkduration;
-                    inmaxworkduration = (o.item.maxworkduration==null) ? "" : o.item.maxworkduration;
-                    inqty = (o.item.qty==null) ? "" : o.item.qty;
-                    insunday = (o.item.sunday==null) ? "" : o.item.sunday;
-                    inmonday = (o.item.monday==null) ? "" : o.item.monday;
-                    intuesday = (o.item.tuesday==null) ? "" : o.item.tuesday;
-                    inwednesday = (o.item.wednesday==null) ? "" : o.item.wednesday;
-                    inthursday = (o.item.thursday==null) ? "" : o.item.thursday;
-                    infriday = (o.item.friday==null) ? "" : o.item.friday;
-                    insaturday = (o.item.saturday==null) ? "" : o.item.saturday;
-                    inactive = (o.item.active==null) ? "" : o.item.active;
-                }
-                $(this).css("padding", 0).css("margin", 0);
-                var type_log = $('<div id="task-edit"><div>').appendTo( obj );
-                var tdiv = $("<div id=\"we-top\"></div>").css("width", "100%").css("height", "45px").css("padding", 0).css("margin", 0)
-                    .css("float","left").appendTo( type_log );
-                tdiv.append($('<p class="validateTips">Fill the required fields</p>').css("margin", 10));
-                var ldiv = $("<div id=\"we-left\"></div>").css("width", "48%").css("height", "100%").css("padding", "0 10px 0 10px").css("margin", 0)
-                    .css("float","left").css("border", "solid").css("border-color", "#aaa").css("border-width", "0px 0px 0px 0px").appendTo( type_log );
-                var rdiv = $("<div id=\"we-right\"></div>").css("width", "48%").css("float","left")
-                    .css("height", "100%").appendTo( type_log );
-                var bdiv = $("<div id=\"we-bottom\"></div>").css("width", "100%").css("padding", 0).css("margin", 0).css("float","left")
-                    .css("border", "solid").css("border-color", "#aaa").css("border-width", "0px 0px 0px 0px").appendTo( type_log );
-                
-                var demanddiv = $("<div></div>").addClass("demanddiv").appendTo(bdiv);
-                var bbar = $("<div id=\"demandbar\"></div>").appendTo(demanddiv).css("padding", "5px 0px 0 0px")
-                bbar.css('width','100%').css('height','32px');
-                $("<div></div>").html("Demands").css('padding', '5px 0 0 10px').css('margin-right','20px').css('float','left').appendTo(bbar);
-                
-                $( "<span><button id=\"demandadd\"></button></span>").css('float','left').appendTo(bbar).css('height', '32').css('background', '#a0b4d2')
-                    .button({text: false, icons: {primary: "ui-icon-plusthick"}}).click(function() {
+            };    
+            var o = $.extend(defaults, opts);
+            o.reload = function () { showtasks(); };
+            o.idname = "task-edit";
+            o.prefix="tedit-";
+            o.width = 30;
+            o.savefunction = function(o) {savetodb({jsonadd: "addtasks", jsonupdate: "updatetasks", globalobj: $.qsglobal.tasks}, o);};
+            o.tr = tr;
+            o.fields = [
+                {name: "Active", itemname: "active", type: "toggle", defval: "#1", col: 1},
+                {name: "Task", itemname: "name", type: "text", defval: "", col: 1},
+                {name: "Description", itemname: "description", type: "text", defval: "", col: 1},
+                {name: "Color", itemname: "color", type: "color", defval: "#cc3333", col: 1}, 
+                {name: "Type", itemname: "type", type: "text", defval: "", col: 1},
+                {name: "Location start", itemname: "locationstart", type: "location", defval: "", col: 1},
+                {name: "Location start", itemname: "locationend", type: "location", defval: "", col: 1},
+                {name: "Start time", itemname: "starttime", type: "time", defval: "", col: 2},
+                {name: "Duration", itemname: "duration", type: "time", defval: "", col: 2},
+                {name: "Minimum work duration", itemname: "minworkduration", type: "time", defval: "", col: 2},
+                {name: "Maximum work duration", itemname: "maxworkduration", type: "time", defval: "", col: 2},
+                {name: "Quantity", itemname: "quantity", type: "numeric", defval: "1", col: 2},
+                {name: "Recurrence", type: "weekdays", col: 2}
+            ];
+            if(o.ind != -1 && $.qsglobal.demands != null) {
+                o.bottomopts = {          
+                    name: "Demands",
+                    attr: "demandid",
+                    jsondel: "deldemands",
+                    parentid: o.item.id,
+                    parentidname: "taskid",
+                    addfunction: function() {
                         $( "#demand-form" ).demandEditScreen({tind: o.ind, titem: o.item}).dialog( "open" );
-                    });
-                    
-                var ordermap = [];
-                
-                $( "<span><button id=\"demandtrash\"></button></span>").css('float','left').appendTo(bbar).css('height', '32')
-                    .css('background', '#a0b4d2').button({text: false, icons: {primary: "ui-icon-trash"}}).click(function() {
-                        rem = [];
-                        $( ".ui-selected", ".demandlist" ).each(function() {
-                            var ind = $("#currdemandlist li").index(this);
-                            rem.push(ind);
-                            var sub=0;
-                            $.each(rem, function(key,val) {
-                                if(val<ind) {
-                                    sub++;
-                                }
-                            });
-                            ind=ind-sub;
-                            var demandinfo = {token:$.qsglobal.session_token, id:$( this ).attr( "demandid" )};
-                            postjson($.qsglobal.dbaddr+'deldemands', demandinfo, function(data) {
-                                if(data.success == "true")
-                                {
-                                    $.qsglobal.demands.splice(ordermap[ind],1);
-                                } else {
-                                    alert("Delete failed.");
-                                }
-                            }, false, null);
-			});
-                        obj.taskEditScreen({ind:options.ind, item:options.item});
-                    });
-                
-                var ulist = $('<ul class="demandlist" id="currdemandlist"></ul>').css('height','98%').css('overflow-y', 'scroll').appendTo( demanddiv );
-                ulist.selectable({ filter: "li", cancel: ".ui-selected" });
-                
-                var demandind = 0;
-                if($.qsglobal.demands != null && options.item != null)
-                {
-                    $.each($.qsglobal.demands, function(key,val) {
-                        if(val.taskid == options.item.id) {
-                            temp = $( "<li></li>" ).html('</div><div class="qstabletag">Start time</div><div class="qstableval">'+val.starttime
-                                +'</div><div class="qstabletag">Duration</div><div class="qstableval">'+val.duration+'</div>'
-                                +'</div><div class="qstabletag">Qty</div><div class="qstableval">'+val.quantity+'</div>'
-                                +'</div><div class="qstabletag">Time needed</div><div class="qstableval">'+val.timeneeded+'</div>'
-                                ).addClass("qstableline").attr("demandid", val.id).dblclick( function() {
-                                    $( "#demand-form" ).demandEditScreen({ind: key, item: val, tind: o.ind, titem: o.item}).dialog( "open" );
-                                });
-                            ulist.append(temp);
-                            ordermap.push(demandind);
-                        }
-                        demandind++;
-                    });
-                }
-                
-                if(options.item == null)
-                    bdiv.hide();
-                
-                ldiv.append($('<form></form>').html(
-                    (o.ind != -1 && o.item.active=="0"?
-                                '<div id="taskactivechoice"><input type="checkbox" id="taskactive" value="0" /><label for="taskactive">Active</label></div>':
-                                '<div id="taskactivechoice"><input type="checkbox" id="taskactive" value="1" checked="checked"/><label for="taskactive">Active</label></div>')+
-                    '<fieldset>'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="taskname">Task</label>'+
-                    '<input type="text" id="taskname" value="'+inname+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:55%"/><br/>'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="taskdescription">Description</label>'+
-                    '<input type="text" id="taskdescription" value="'+indescription+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:55%"/><br/>'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="taskcolor">Color</label>'+
-                    '<input style="display: inline-block;" id="taskcolor" value="'+incolor+'"><br/>'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="tasktype">Type</label>'+
-                    '<input type="text" id="tasktype" value="'+intype+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:55%"/><br/>'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="tasklocationstart">Location start</label>'+
-                    '<input type="button" id="tasklocationstart" value="'+inlocationstart+'" class="button ui-widget-content ui-corner-all" style="display: inline-block; width:55%"/><br />'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="tasklocationend">Location end</label>'+
-                    '<input type="button" id="tasklocationend" value="'+inlocationend+'" class="button ui-widget-content ui-corner-all" style="display: inline-block; width:55%;"/><br />'+
-                    '</fieldset>'));
-                
-                rdiv.append($('<form></form>').html(
-                    '<fieldset>'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="taskstarttime">Start time</label>'+
-                    '<input type="text" id="taskstarttime" value="'+instarttime+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:55%;"/><br />'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="taskduration">Duration</label>'+
-                    '<input type="text" id="taskduration" value="'+induration+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:55%;"/><br />'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="taskminworkduration">Minimum work duration</label>'+
-                    '<input type="text" id="taskminworkduration" value="'+inminworkduration+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:55%;"/><br />'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="taskmaxworkduration">Maximum work duration</label>'+
-                    '<input type="text" id="taskmaxworkduration" value="'+inmaxworkduration+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:55%;"/><br />'+
-                    '<label style="display: inline-block; width: 40%; height: 25px;" for="taskqty">Quantity</label>'+
-                    '<input type="text" id="taskqty" value="'+inqty+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:55%;"/><br />'+
-                    '</fieldset>'+
-                    '<div style="display: inline-block; width: 40%; height: 25px;">Recurrence</div><div id="taskweekday" style="float: right;padding: 0 0 10px 0;">'+
-                            (o.ind != -1 && o.item.sunday=="1"?
-                                '<input type="checkbox" style="display: inline-block;" id="tasksunday" value="1" checked="checked"/><label for="tasksunday">Su</label>':
-                                '<input type="checkbox" style="display: inline-block;" id="tasksunday" value="0"/><label for="tasksunday">Su</label>')+
-                            (o.ind != -1 && o.item.monday=="1"?
-                                '<input type="checkbox" style="display: inline-block;" id="taskmonday" value="1" checked="checked"/><label for="taskmonday">Mo</label>':
-                                '<input type="checkbox" style="display: inline-block;" id="taskmonday" value="0"/><label for="taskmonday">Mo</label>')+
-                            (o.ind != -1 && o.item.tuesday=="1"?
-                                '<input type="checkbox" style="display: inline-block;" id="tasktuesday" value="1" checked="checked"/><label for="tasktuesday">Tu</label>':
-                                '<input type="checkbox" style="display: inline-block;" id="tasktuesday" value="0"/><label for="tasktuesday">Tu</label>')+
-                            (o.ind != -1 && o.item.wednesday=="1"?
-                                '<input type="checkbox" style="display: inline-block;" id="taskwednesday" value="1" checked="checked"/><label for="taskwednesday">We</label>':
-                                '<input type="checkbox" style="display: inline-block;" id="taskwednesday" value="0"/><label for="taskwednesday">We</label>')+
-                            (o.ind != -1 && o.item.thursday=="1"?
-                                '<input type="checkbox" style="display: inline-block;" id="taskthursday" value="1" checked="checked"/><label for="taskthursday">Th</label>':
-                                '<input type="checkbox" style="display: inline-block;" id="taskthursday" value="0"/><label for="taskthursday">Th</label>')+
-                            (o.ind != -1 && o.item.friday=="1"?
-                                '<input type="checkbox" style="display: inline-block;" id="taskfriday" value="1" checked="checked"/><label for="taskfriday">Fr</label>':
-                                '<input type="checkbox" style="display: inline-block;" id="taskfriday" value="0"/><label for="taskfriday">Fr</label>')+
-                            (o.ind != -1 && o.item.saturday=="1"?
-                                '<input type="checkbox" style="display: inline-block;" id="tasksaturday" value="1" checked="checked"/><label for="tasksaturday">Sa</label>':
-                                '<input type="checkbox" style="display: inline-block;" id="tasksaturday" value="0"/><label for="tasksaturday">Sa</label>')+
-                        '</div>'
-                    ));
-                
-                if($( "#tasklocationstart" ).val() == "") {
-                    $( "#tasklocationstart" ).button().click(function() { $.qsglobal.currcoord = $(this); setmap('0,0',$( "#tasklocationstart" ),true);});
-                } else {
-                    $( "#tasklocationstart" ).button().click(function() { $.qsglobal.currcoord = $(this); setmap($( "#tasklocationstart" ).val(),$( "#tasklocationstart" ),false);});
-                }
-                if($( "#tasklocationend" ).val() == "") {
-                    $( "#tasklocationend" ).button().click(function() { $.qsglobal.currcoord = $(this); setmap('0,0',$( "#tasklocationend" ),true);});
-                } else {
-                    $( "#tasklocationend" ).button().click(function() { $.qsglobal.currcoord = $(this); setmap($( "#tasklocationend" ).val(),$( "#tasklocationend" ),false);});
-                }
-                
-                $( "#taskactivechoice" ).buttonset();
-                $( "#taskweekday" ).buttonset();
-                $("#taskcolor").simpleColor({
-			border: '1px solid #333333',
-			boxHeight: '25px',
-			displayColorCode: true
-                });
-                $( "#taskactive" ).button().click(function() {$(this).val( $(this).val()=="0"?"1":"0" )});
-                $( "#tasksunday" ).button().click(function() {$(this).val( $(this).val()=="0"?"1":"0" )});
-                $( "#taskmonday" ).button().click(function() {$(this).val( $(this).val()=="0"?"1":"0" )});
-                $( "#tasktuesday" ).button().click(function() {$(this).val( $(this).val()=="0"?"1":"0" )});
-                $( "#taskwednesday" ).button().click(function() {$(this).val( $(this).val()=="0"?"1":"0" )});
-                $( "#taskthursday" ).button().click(function() {$(this).val( $(this).val()=="0"?"1":"0" )});
-                $( "#taskfriday" ).button().click(function() {$(this).val( $(this).val()=="0"?"1":"0" )});
-                $( "#tasksaturday" ).button().click(function() {$(this).val( $(this).val()=="0"?"1":"0" )});
-                    
-                var name = $( "#taskname" ),
-                    description = $( "#taskdescription" ),
-                    color = $( "#taskcolor" ),
-                    type = $( "#tasktype" ),
-                    locationstart = $( "#tasklocationstart" ),
-                    locationend = $( "#tasklocationend" ),
-                    starttime = $( "#taskstarttime" ),
-                    duration = $( "#taskduration" ),
-                    minworkduration = $( "#taskminworkduration" ),
-                    maxworkduration = $( "#taskmaxworkduration" ),
-                    qty = $( "#taskqty" ),
-                    sunday = $( "#tasksunday" ),
-                    monday = $( "#taskmonday" ),
-                    tuesday = $( "#tasktuesday" ),
-                    wednesday = $( "#taskwednesday" ),
-                    thursday = $( "#taskthursday" ),
-                    friday = $( "#taskfriday" ),
-                    saturday = $( "#tasksaturday" ),
-                    active = $( "#taskactive" ),
-                    allFields = $( [] ).add( name ).add( description ).add( color ).add( type ).add( locationstart ).add( locationend )
-                        .add( starttime ).add( duration ).add( minworkduration ).add( maxworkduration ).add( qty )
-                        .add( sunday ).add( monday ).add( tuesday ).add( wednesday ).add( thursday ).add( friday ).add( saturday ).add( active ),
-                    tips = $( ".validateTips" );
-                 
-                obj.dialog({
-		    autoOpen: false,
-		    width: 950,
-                    //height: 700,
-		    modal: true,
-		    buttons: {
-                        "Save": function() {
-                            var bValid = true;
-                            
-                            allFields.removeClass( "ui-state-error" );
-                            
-                            var taskinfo = {
-                                token:$.qsglobal.session_token, 
-                                name:name.val(),
-                                description:description.val(),
-                                color:color.val(),
-                                type:type.val(),
-                                locationstart:locationstart.val(),
-                                locationend:locationend.val(),
-                                starttime:starttime.val(),
-                                duration:duration.val(),
-                                minworkduration:minworkduration.val(),
-                                maxworkduration:maxworkduration.val(),
-                                qty:qty.val(),
-                                sunday:sunday.val(),
-                                monday:monday.val(),
-                                tuesday:tuesday.val(),
-                                wednesday:wednesday.val(),
-                                thursday:thursday.val(),
-                                friday:friday.val(),
-                                saturday:saturday.val(),
-                                active:active.val(),
-                                note:"==="+name+"===",
-                                id:-1
-                            };
-                            if(o.ind==-1) {
-                                taskinfo.id = -1;
-                                postjson($.qsglobal.dbaddr+'addtasks', taskinfo, function(data) {
-                                    if(data.success == "true")
-                                    {
-                                        taskinfo.id = data.id;
-                                        $.qsglobal.tasks.push(taskinfo);
-                                        if(!$.qsglobal.isfullscreen) {
-                                            $("#tasks").tasksScreen({loff: 83, toff: 101});
-                                        } else {
-                                            $("#fullscreen").tasksScreen();
-                                        }
-                                    } else {
-                                        alert("Save failed.")
-                                    }
-                                }, false, null);
-                            } else {
-                                taskinfo.id = o.item.id;
-                                taskinfo.note = o.item.note;
-                                postjson($.qsglobal.dbaddr+'updatetasks', taskinfo, function(data) {
-                                    if(data.success == "true")
-                                    {
-                                        taskinfo.id = o.item.id;
-                                        $.qsglobal.tasks.splice(o.ind,1,taskinfo);
-                                        if(!$.qsglobal.isfullscreen) {
-                                            $("#tasks").tasksScreen({loff: 83, toff: 101});
-                                        } else {
-                                            $("#fullscreen").tasksScreen();
-                                        }
-                                    } else {
-                                        alert("Save failed.")
-                                    }
-                                }, false, null);
-                            }
-                            
-                            $( this ).dialog( "close" );
-                        },
-                        Cancel: function() {
-                            $( this ).dialog( "close" );
-                        }
                     },
-                    close: function() {
-                        allFields.val( "" ).removeClass( "ui-state-error" );
+                    editfunction: function(key,val) {
+                        $( "#demand-form" ).demandEditScreen({ind: key, item: val, tind: o.ind, titem: o.item}).dialog( "open" );
+                    },
+                    globalobj: $.qsglobal.demands, 
+                    writeperiod: function(obj) {
+                        return '</div><div class="qstabletag">'+tr('Start time')+'</div><div class="qstableval">'+obj.starttime
+                                +'</div><div class="qstabletag">'+tr('Duration')+'</div><div class="qstableval">'+obj.duration+'</div>'
+                                +'</div><div class="qstabletag">'+tr('Qty')+'</div><div class="qstableval">'+obj.quantity+'</div>'
+                                +'</div><div class="qstabletag">'+tr('Time needed')+'</div><div class="qstableval">'+obj.timeneeded+'</div>';
                     }
-		});
-                 
+                };
+            }
+            return this.each(function() {
+                $(this).qsforms(o);
             });
         },
         demandEditScreen: function(opts) {          
             $( this ).empty();
-            
             //Settings list and the default values
             var defaults = {
                 ind: -1,
@@ -639,184 +375,49 @@
                 item: null,
                 titem: null
             };
-            var options = $.extend(defaults, opts);
-         
+            var o = $.extend(defaults, opts);
+            o.reload = function f() { $("#task-form").taskEditScreen({ind:o.tind, item:o.titem} ); };
+            o.savefunction = function(o) {savetodb({jsonadd: "adddemands", jsonupdate: "updatedemands", globalobj: $.qsglobal.demands}, o);};
+            o.idname = "demand-edit";
+            o.prefix = "dedit-";
+            o.tr = tr;
+            o.fields = [
+                {name: "Start time", itemname: "starttime", type: "time", defval: "", col: 1},
+                {name: "Duration", itemname: "duration", type: "time", defval: "", col: 1},
+                {name: "Quantity", itemname: "quantity", type: "numeric", defval: "", col: 1},
+                {name: "Time needed", itemname: "timeneeded", type: "time", defval: "", col: 1},
+            ];
+            o.hiddenval = [ {itemname: "taskid", val: o.titem.id} ];
             return this.each(function() {
-                var o =options;
-                var obj = $(this);
-                
-                if(o.ind == -1) {
-                    o.item = {}
-                    o.item.starttime = "";
-                    o.item.duration = "";
-                    o.item.quantity = "";
-                    o.item.timeneeded = "";
-                    o.item.token = $.qsglobal.session_token;
-                }
-                
-                var type_log = $('<div id="demand-edit"><div>').appendTo( obj );
-                type_log.append($('<p class="validateTips">Fill the required fields</p>'));
-                type_log.append($('<form></form>').html(
-                    '<fieldset>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="demandstarttime">Start time</label>'+
-                    '<input type="text" id="demandstarttime" value="'+o.item.starttime+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="demandduration">Duration</label>'+
-                    '<input type="text" id="demandduration" value="'+o.item.duration+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="demandquantity">Quantity</label>'+
-                    '<input type="text" id="demandquantity" value="'+o.item.quantity+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="demandtimeneeded">Time needed</label>'+
-                    '<input type="text" id="demandtimeneeded" value="'+o.item.timeneeded+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
-                    '</fieldset>'));
-                        
-                var starttime = $( "#demandstarttime" ),
-                    duration = $( "#demandduration" ),
-                    quantity = $( "#demandquantity" ),
-                    timeneeded = $( "#demandtimeneeded" ),
-                    allFields = $( [] ).add( starttime ).add( duration ).add( quantity ).add( timeneeded ),
-                    tips = $( ".validateTips" );
-                 
-                obj.dialog({
-		    autoOpen: false,
-		    width: 750,
-		    modal: true,
-		    buttons: {
-                        "Save": function() {
-                            var bValid = true;
-                            
-                            allFields.removeClass( "ui-state-error" );
-                            
-                            var demandinfo = {
-                                token:$.qsglobal.session_token,
-                                starttime:starttime.val(),
-                                duration:duration.val(),
-                                quantity:quantity.val(),
-                                timeneeded:timeneeded.val(),
-                                taskid:o.titem.id,
-                                id:""
-                            };
-                            if(o.ind==-1) {
-                                demandinfo.id = -1;
-                                postjson($.qsglobal.dbaddr+'adddemands', demandinfo, function(data) {
-                                    if(data.success == "true")
-                                    {
-                                        demandinfo.id = data.id;
-                                        $.qsglobal.demands.push(demandinfo);
-                                        $("#task-form").taskEditScreen({ind:o.tind, item:o.titem} );
-                                    } else {
-                                        alert("Save failed.")
-                                    }
-                                }, false, null);
-                            } else {
-                                demandinfo.id = o.item.id;
-                                postjson($.qsglobal.dbaddr+'updatedemands', demandinfo, function(data) {
-                                    if(data.success == "true")
-                                    {
-                                        demandinfo.id = o.item.id;
-                                        $.qsglobal.demands.splice(o.ind,1,demandinfo);
-                                        $("#task-form").taskEditScreen({ind:o.tind, item:o.titem} );
-                                    } else {
-                                        alert("Save failed.")
-                                    }
-                                }, false, null);
-                            }
-                            $( this ).dialog( "close" );
-                        },
-                        Cancel: function() {
-                            $( this ).dialog( "close" );
-                        }
-                    },
-                    close: function() {
-                        allFields.val( "" ).removeClass( "ui-state-error" );
-                    }
-		});
-                 
+                $(this).qsforms(o);
             });
         },
         taskresEditScreen: function(opts) {          
             $( this ).empty();
-            
             //Settings list and the default values
             var defaults = {
                 item: null,
                 ind: -1,
-                blockobj: null,
             };
-            
-            var options = $.extend(defaults, opts);
-         
+            var o = $.extend(defaults, opts);
+            o.reload = function () { $("#task-form").taskEditScreen({ind:o.tind, item:o.titem} ); };
+            o.savefunction = function(o) {savetodb({jsonadd: "addmaps", jsonupdate: "updatemaps", globalobj: $.qsglobal.maps}, o);};
+            o.idname = "taskres-edit";
+            o.prefix = "tredit-";
+            o.tr = tr;
+            o.width = 45;
+            o.fields = [
+                {name: "Resource quantity requirement", itemname: "qty", type: "numeric", defval: "", col: 1},
+                {name: "Resource utilization start time", itemname: "starttime", type: "time", defval: "", col: 1},
+                {name: "Resource utilization duration", itemname: "duration", type: "time", defval: "", col: 1},
+            ];
+            o.hiddenval = [
+                {itemname: "id1", val: o.item.id1},
+                {itemname: "id2", val: o.item.id2},
+                {itemname: "type", val: o.item.type}
+            ];
             return this.each(function() {
-                var o =options;
-                var obj = $(this);
-                alert(o.ind+' '+o.item.qty);
-                var inqty = '',
-                    instarttime = '',
-                    induration = '';
-                if(o.ind != -1) {
-                   inqty = o.item.qty;
-                   instarttime = o.item.starttime;
-                   induration = o.item.duration;
-                }
-                var type_log = $('<div id="taskres-edit"><div>').appendTo( obj );
-                type_log.append($('<p class="validateTips">Fill the required fields</p>'));
-                type_log.append($('<form></form>').html(
-                    '<fieldset>'+
-                    '<label style="display: inline-block; width: 45%; height: 25px;" for="taskresqty">Resource qty requirement</label>'+
-                    '<input type="text" id="taskresqty" value="'+inqty+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:50%"/><br/>'+
-                    '<label style="display: inline-block; width: 45%; height: 25px;" for="taskresstarttime">Resource utilization start time</label>'+
-                    '<input type="text" id="taskresstarttime" value="'+instarttime+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:50%"/><br/>'+
-                    '<label style="display: inline-block; width: 45%; height: 25px;" for="taskresduration">Resource utilization duration</label>'+
-                    '<input type="text" id="taskresduration" value="'+induration+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:50%;"/><br />'+ 
-                    '</fieldset>'));
-                
-                var qty = $( "#taskresqty" ),
-                    starttime = $( "#taskresstarttime" ),
-                    duration = $( "#taskresduration" ),
-                    allFields = $( [] ).add( qty ).add( starttime ).add( duration ),
-                    tips = $( ".validateTips" );
-                 
-                obj.dialog({
-		    autoOpen: false,
-		    width: 750,
-		    modal: true,
-		    buttons: {
-                        "Save": function() {
-                            var bValid = true;
-                            
-                            allFields.removeClass( "ui-state-error" );
-                            
-                            var taskresinfo = {
-                                token:$.qsglobal.session_token, 
-                                qty:qty.val(),
-                                starttime:starttime.val(),
-                                duration:duration.val(),
-                                type:o.item.type,
-                                id1:o.item.id1,
-                                id2:o.item.id2
-                            };
-                            
-                            taskresinfo.id = o.item.id;
-                            postjson($.qsglobal.dbaddr+'updatemaps', taskresinfo, function(data) {
-                                if(data.success == "true")
-                                {
-                                    taskresinfo.id = o.item.id;
-                                    $.qsglobal.maps.splice(o.ind,1,taskresinfo);
-                                    
-                                } else {
-                                    alert("Save failed.")
-                                }
-                            }, false, null);
-                            
-                            $( this ).dialog( "close" );
-                        },
-                        Cancel: function() {
-                            $( this ).dialog( "close" );
-                        }
-                    },
-                    close: function() {
-                        allFields.val( "" ).removeClass( "ui-state-error" );
-                    }
-		});
-                 
+                $(this).qsforms(o);
             });
         }
     });

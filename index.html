@@ -2,13 +2,13 @@
 <!--    QuickSched web app 
         Copyright 2012, Mathieu Bouchard
         Licensed under the GPL Version 3 license.
-        http://q-opt.com    -->
+        http://skdit.com    -->
 
 <html>
 <head>
     <meta charset='utf-8'/>
-    <title>QuickSched (beta)</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/formalize.css" />
+    <title>skdit</title>
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="css/formalize.css" /> -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui-quicksched.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/navigation.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
@@ -18,6 +18,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/resources.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/tasks.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/shifts.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/forms.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/solutions.css" />
     <link rel="shortcut icon" href="favicon.ico">
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script> 
     <script type="text/javascript" src="js/jquery.js"></script>  
@@ -31,13 +33,15 @@
     <script type="text/javascript" src="js/colorpicker.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/gantt.js"></script>
+    <script type="text/javascript" src="js/forms.js"></script>
     <script type="text/javascript" src="js/workers.js"></script>
     <script type="text/javascript" src="js/tags.js"></script>
     <script type="text/javascript" src="js/resources.js"></script>
     <script type="text/javascript" src="js/tasks.js"></script>
     <script type="text/javascript" src="js/shifts.js"></script>
+    <script type="text/javascript" src="js/solutions.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-    <script type="text/javascript" src="js/navigation.js"></script>
+    <script type="text/javascript" src="js/languages.js"></script>
     <script type="text/javascript" src="js/quicksched.js"></script>
     
 </head>
@@ -48,32 +52,49 @@
                 <li><div class="borderelement hundredblock"></div></li>
                 <li><div id="logo" class="borderelement"></div></li>
                 <li><div id="title" class="borderelement">
-                    <h3>QuickSchedule (beta)</h3>
+                    <img src="img/skdittext.png" border="0" height="50px">
+                    <!-- <h3>Skdit (beta)</h3> -->
                 </div></li>
                <!-- <li><div id="cdSiteSeal1" class="borderelementr"><script id="sealimg" type="text/javascript" src="//tracedseals.starfieldtech.com/siteseal/get?scriptId=cdSiteSeal1&amp;cdSealType=Seal1&amp;sealId=55e4ye7y7mb73b45102be08020c4d8rhvh7y7mb7355e4ye70dc3c7b95ad9c33a"></script></div></li> -->
                 <li ><div id="loginzone" class="borderelementr"><input type="button" value="Login" id="dologin" href="#login-form"/></div></li>
                 <li ><div id="userzone" class="borderelementr"><h2 id="usernametag">myuser name</h2><input type="button" value="Logout" id="dologout"/></div></li>
+                <li><div class="borderelementr" id="langselect"><select name="languages" id="langselected">
+                    <option value=12>العربية</option> <!--Arabic-->
+                    <option value=8>中文</option> <!--Chinese-->
+                    <option value=4>Deutsch</option> <!--Deutch-->
+                    <option value=0>English</option> <!--English-->   
+                    <option value=1>Français</option> <!--French-->
+                    <option value=11>עברית</option> <!--Hebrew-->
+                    <option value=10>हिंदी</option> <!--Hindi-->
+                    <option value=3>Italian</option> <!--Italian-->
+                    <option value=7>日本人</option> <!--Japanese-->
+                    <option value=6>Polski</option> <!--Polish-->
+                    <option value=5>Português</option> <!--Portuguese-->
+                    <option value=9>русский</option> <!--Russian-->
+                    <option value=2>Español</option> <!--Spanish-->
+                </select></div></li>
             </ul>     
         </div>
         <div id="maintabs">
                 <ul>
-                    <li class="qs-left-menu"><a href="#workers"><img src="img/worker-col.png" border="0" width="27px" height="27px"><div style="width: 82px; font-size: 10px; text-align: center">Workers</div></a></li>
-                    <li class="qs-left-menu"><a href="#tasks"><img src="img/task-col.png" border="0" width="27px" height="27px"><div style="font-size: 10px; text-align: center">Tasks</div></a></li>
-                    <li class="qs-left-menu"><a href="#shifts"><img src="img/shift-col.png" border="0" width="27px" height="27px"><div style="font-size: 10px; text-align: center">Shifts</div></a></li>
-                    <li class="qs-left-menu"><a href="#resources"><img src="img/resource-col.png" border="0" width="27px" height="27px"><div style="font-size: 10px; text-align: center">Resources</div></a></li>
-                    <li class="qs-left-menu"><a href="#tags"><img src="img/tag-col.png" border="0" width="30px" height="27px"><div style="font-size: 10px; text-align: center">Tags</div></a></li>
-                    <li class="qs-left-menu"><a href="#solver"><img src="img/solver-col.png" border="0" width="30px" height="27px"><div style="font-size: 10px; text-align: center">Solver</div></a></li>
-                    <li class="qs-left-menu"><a href="#solution"><img src="img/solution-col.png" border="0" width="27px" height="27px"><div style="font-size: 10px; text-align: center">Solution</div></a></li>
-                    <li class="qs-left-menu"><a href="#settings"><img src="img/setting-col.png" border="0" width="27px" height="27px"><div style="font-size: 10px; text-align: center">Settings</div></a></li>
+                    <li class="qs-left-menu"><a href="#workers"><img src="img/worker-col.png" border="0"><div id="liwo" style="width: 82px; font-size: 10px; text-align: center">orkers</div></a></li>
+                    <li class="qs-left-menu"><a href="#tasks"><img src="img/task-col.png" border="0"><div id="lita" style="font-size: 10px; text-align: center">asks</div></a></li>
+                    <li class="qs-left-menu"><a href="#shifts"><img src="img/shift-col.png" border="0"><div id="lish" style="font-size: 10px; text-align: center">hifts</div></a></li>
+                    <li class="qs-left-menu"><a href="#resources"><img src="img/resource-col.png" border="0"><div id="lire" style="font-size: 10px; text-align: center">esources</div></a></li>
+                    <li class="qs-left-menu"><a href="#tags"><img src="img/tag-col.png" border="0"><div id="litg" style="font-size: 10px; text-align: center">ags</div></a></li>
+                    <li class="qs-left-menu"><a href="#solver"><img src="img/solver-col.png" border="0"><div id="liso" style="font-size: 10px; text-align: center">olver</div></a></li>
+                    <li class="qs-left-menu"><a href="#solution"><img src="img/solution-col.png" border="0"><div id="lisl" style="font-size: 10px; text-align: center">olution</div></a></li>
+                    <li class="qs-left-menu"><a href="#settings"><img src="img/setting-col.png" border="0"><div id="lise" style="font-size: 10px; text-align: center">ettings</div></a></li>
                 </ul>
-                <div id="workers" class="mainpanel"></div>
-                <div id="tasks" class="mainpanel"></div>
-                <div id="shifts" class="mainpanel"></div>
-                <div id="resources" class="mainpanel"></div>
-                <div id="tags" class="mainpanel"></div>
-                <div id="solver" class="mainpanel"><p>Solver $$x_2$$</p></div>
-                <div id="solution" class="mainpanel">Solution</div>
-                <div id="settings" class="mainpanel">Settings</div>
+                <div id="workers" class="mainpanel dummylink"></div>
+                <div id="tasks" class="mainpanel dummylink"></div>
+                <div id="shifts" class="mainpanel dummylink"></div>
+                <div id="resources" class="mainpanel dummylink"></div>
+                <div id="tags" class="mainpanel dummylink"></div>
+                <div id="solver" class="mainpanel dummylink"></div>
+                <div id="solution" class="mainpanel dummylink"></div>
+                <div id="settings" class="mainpanel dummylink"></div>
+                <div id="normalscreen" class="mainpanel"></div>
         </div>
     </div>
     <div id="login-form" title="Login"></div>

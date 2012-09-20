@@ -3,7 +3,7 @@
  *
  * Copyright 2012, Mathieu Bouchard
  * Licensed under the GPL Version 3 license.
- * http://q-opt.com
+ * http://skdit.com
  *
  */
 
@@ -26,11 +26,11 @@
                 bbar.css('width',$(window).width()-options.loff-20);
                 
                 $("<span id=\"tagradioassign\"></span>").html(
-                    "<input type=\"radio\" id=\"tagradioedit\" checked=\"checked\" name=\"tagradioassign\"/><label for=\"tagradioedit\">Edit</label>"+
-                    "<input type=\"radio\" id=\"tagradioworker\" name=\"tagradioassign\"/><label for=\"tagradioworker\">Workers</label>"+
-                    "<input type=\"radio\" id=\"tagradiotask\" name=\"tagradioassign\"/><label for=\"tagradiotask\">Tasks</label>"+
-                    "<input type=\"radio\" id=\"tagradioshift\" name=\"tagradioassign\"/><label for=\"tagradioshift\">Shifts</label>"+
-                    "<input type=\"radio\" id=\"tagradioresource\" name=\"tagradioassign\"/><label for=\"tagradioresource\">Resources</label>")
+                    "<input type=\"radio\" id=\"tagradioedit\" checked=\"checked\" name=\"tagradioassign\"/><label for=\"tagradioedit\">"+tr("Edit")+"</label>"+
+                    "<input type=\"radio\" id=\"tagradioworker\" name=\"tagradioassign\"/><label for=\"tagradioworker\">"+tr("Workers")+"</label>"+
+                    "<input type=\"radio\" id=\"tagradiotask\" name=\"tagradioassign\"/><label for=\"tagradiotask\">"+tr("Tasks")+"</label>"+
+                    "<input type=\"radio\" id=\"tagradioshift\" name=\"tagradioassign\"/><label for=\"tagradioshift\">"+tr("Shifts")+"</label>"+
+                    "<input type=\"radio\" id=\"tagradioresource\" name=\"tagradioassign\"/><label for=\"tagradioresource\">"+tr("Resources")+"</label>")
                     .css('float','left').buttonset().appendTo(bbar);
                 $( "#tagradioedit" ).button().click(function() {
                     $( "#currvmap" ).remove();
@@ -146,12 +146,12 @@
                                 if(data.success == "true") {
                                     $.qsglobal.tags.splice(ind,1);
                                 } else {
-                                    alert("Delete failed.");
+                                    alert(tr("Failed to delete"));
                                 }
                             }, false, null);
 			});
                         if(!$.qsglobal.isfullscreen) {
-                            $("#tags").tagsScreen({loff: 83, toff: 101});
+                            $("#normalscreen").tagsScreen({loff: 83, toff: 101});
                         } else {
                             $("#fullscreen").tagsScreen();
                         }
@@ -161,8 +161,8 @@
             
                 if($.qsglobal.tags != null)
                 {
-                    temp = $( "<li></li>" ).html('<img src="img/plus.png"></img><div class="tblocktext">Add a new tag</div>').addClass("tblock")
-                        .click( function() { $( "#tag-form" ).tagEditScreen().dialog( "open" );}).addClass("taddblock").attr("tagid", -1);
+                    temp = $( "<li></li>" ).html('<img src="img/plus.png"></img><div class="tblocktext">'+tr("Add a new tag")+'</div>').addClass("tblock")
+                        .click( function() { $( "#tag-form" ).attr("title", tr("New tag")).tagEditScreen().dialog( "open" );}).addClass("taddblock").attr("tagid", -1);
                     ulist.append(temp);
                     $.each($.qsglobal.tags, function(key,val) {
                         
@@ -179,113 +179,25 @@
         },
         tagEditScreen: function(opts) {          
             $( this ).empty();
-            
             //Settings list and the default values
             var defaults = {
                 ind: -1,
                 item: null
             };
-            var options = $.extend(defaults, opts);
-         
+            $( this ).empty();
+            var o = $.extend(defaults, opts);
+            o.reload = function () { showtags(); };
+            o.savefunction = function(o) {savetodb({jsonadd: "addtags", jsonupdate: "updatetags", globalobj: $.qsglobal.tags}, o);};
+            o.tr = tr;
+            o.prefix="tagedit-";
+            o.idname = "tag-edit";
+            o.fields = [
+                {name: "Color", itemname: "color", type: "color", defval: "#cc3333", col: 1},
+                {name: "Tag", itemname: "name", type: "text", defval: "", col: 1},
+                {name: "Description", itemname: "description", type: "time", defval: "", col: 1}
+            ];
             return this.each(function() {
-                var o =options;
-                var obj = $(this);
-                //$(this).css('background', '#a0b4d2');
-                
-                
-                var inname = '',
-                    indesc = '',
-                    incolor = '#cc3333';
-                if(o.ind != -1) {
-                   inname = o.item.name;
-                   indesc = o.item.description;
-                   incolor = o.item.color;
-                }
-                var type_log = $('<div id="tag-edit"><div>').appendTo( obj );
-                type_log.append($('<p class="validateTips">Fill the required fields</p>'));
-                type_log.append($('<form></form>').html(
-                    '<fieldset>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="tagcolor">Color</label>'+
-                    '<input style="display: inline-block;" id="tagcolor" value="'+incolor+'"><br/>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="tagname">Tag</label>'+
-                    '<input type="text" id="tagname" value="'+inname+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%"/><br/>'+
-                    '<label style="display: inline-block; width: 15%; height: 25px;" for="tagdesc">Description</label>'+
-                    '<input type="text" id="tagdesc" value="'+indesc+'" class="text ui-widget-content ui-corner-all" style="display: inline-block; width:80%;"/><br />'+
-                    //'<input type="text" name="color" id="tagcolor" value="#cc3333" class="text ui-widget-content ui-corner-all" />'+
-                    
-                    '</fieldset>'));
-                
-                $("#tagcolor").simpleColor({
-			border: '1px solid #333333',
-			boxHeight: '25px',
-			displayColorCode: true
-                });
-                
-                var name = $( "#tagname" ),
-                    desc = $( "#tagdesc" ),
-                    color = $( "#tagcolor" ),
-                    allFields = $( [] ).add( name ).add( desc ).add( color ),
-                    tips = $( ".validateTips" );
-                 
-                obj.dialog({
-		    autoOpen: false,
-		    width: 750,
-		    modal: true,
-		    buttons: {
-                        "Save": function() {
-                            var bValid = true;
-                            
-                            allFields.removeClass( "ui-state-error" );
-                            
-                            var taginfo = {token:$.qsglobal.session_token, name:"", description:"", color:"", id:""};
-                            taginfo.name = name.val();
-                            taginfo.description = desc.val();
-                            taginfo.color = color.val();
-                            if(o.ind==-1) {
-                                taginfo.id = -1;
-                                postjson($.qsglobal.dbaddr+'addtags', taginfo, function(data) {
-                                    if(data.success == "true")
-                                    {
-                                        taginfo.id = data.id;
-                                        $.qsglobal.tags.push(taginfo);
-                                        if(!$.qsglobal.isfullscreen) {
-                                            $("#tags").tagsScreen({loff: 83, toff: 101});
-                                        } else {
-                                            $("#fullscreen").tagsScreen();
-                                        }
-                                    } else {
-                                        alert("Save failed.")
-                                    }
-                                }, false, null);
-                            } else {
-                                taginfo.id = o.item.id;
-                                postjson($.qsglobal.dbaddr+'updatetags', taginfo, function(data) {
-                                    if(data.success == "true")
-                                    {
-                                        taginfo.id = o.item.id;
-                                        $.qsglobal.tags.splice(o.ind,1,taginfo);
-                                        if(!$.qsglobal.isfullscreen) {
-                                            $("#tags").tagsScreen({loff: 83, toff: 101});
-                                        } else {
-                                            $("#fullscreen").tagsScreen();
-                                        }
-                                    } else {
-                                        alert("Save failed.")
-                                    }
-                                }, false, null);
-                            }
-                            
-                            $( this ).dialog( "close" );
-                        },
-                        Cancel: function() {
-                            $( this ).dialog( "close" );
-                        }
-                    },
-                    close: function() {
-                        allFields.val( "" ).removeClass( "ui-state-error" );
-                    }
-		});
-                 
+                $(this).qsforms(o);
             });
         }
     });

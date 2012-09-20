@@ -3,12 +3,13 @@
  *
  * Copyright 2012, Mathieu Bouchard
  * Licensed under the GPL Version 3 license.
- * http://q-opt.com
+ * http://skdit.com
  *
  */
 
 .ganttcontainer{
-    overflow-x: scroll;
+    overflow-x: hidden;
+    /*overflow-y: hidden;*/
     margin: 0;
     padding: 0;
 }

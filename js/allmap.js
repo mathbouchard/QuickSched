@@ -3,7 +3,7 @@
  *
  * Copyright 2012, Mathieu Bouchard
  * Licensed under the GPL Version 3 license.
- * http://q-opt.com
+ * http://skdit.com
  *
  */
 
@@ -36,9 +36,9 @@
                 $(this).empty();
                 var obj = $(this);
                 
-                var updiv = $("<div id=\"vmap-up\"></div>").css("overflow-y", "scroll").css("width", $(window).width()-o.loff).css("height", ($(window).height()-o.toff)/2.0)
+                var updiv = $("<div id=\"vmap-up\"></div>").css("overflow-y", "auto").css("width", $(window).width()-o.loff).css("height", ($(window).height()-o.toff)/2.0)
                     .css("border", "solid").css("border-color", "#aaa").css("border-width", "0px 0px 1px 0px").appendTo( $(this) );
-                var downdiv = $("<div id=\"vmap-down\"></div>").css("overflow-y", "scroll").css("width", $(window).width()-o.loff).css("height", ($(window).height()-o.toff)/2).appendTo( $(this) );
+                var downdiv = $("<div id=\"vmap-down\"></div>").css("overflow-y", "auto").css("width", $(window).width()-o.loff).css("height", ($(window).height()-o.toff)/2).appendTo( $(this) );
 				
                 var uplist = $('<ul id="uplist"></ul>').appendTo( updiv );
                 var downlist = $('<ul id="downlist"></ul>').appendTo( downdiv );
@@ -67,7 +67,7 @@
                                     textclass: o.downtextclass,
                                     name: o.downname,
                                     desc: o.downdesc,
-                                }).dialog("option", "title", o.upname(val)+' mapping').dialog("open");
+                                }).dialog("option", "title", o.upname(val)+' '+tr("mappings")).dialog("open");
                             }).attr("objid", val.id);
 			
                         uplist.append(temp);
@@ -114,7 +114,7 @@
                             {
                                 $.qsglobal.maps.push(mapinfo);
                             } else {
-                                alert("Redundant map.")
+                                alert(tr("Redundant map"))
                             }
                         }, true, null);
                     }
@@ -144,10 +144,10 @@
                 $(this).css("padding", 0).css("margin", 0);
                 //var mapcont = $('<div></div>').css("width", "100%").css("height", "100%").css("overflow","scroll").appendTo(obj);
                 
-                var ldiv = $("<div id=\"hmap-left\"><h3 style=\"text-align: center\">Mapped</h3></div>").css("width", "50%").css("height", "100%")
-                    .css("float","left").css("overflow","scroll").css("border", "solid").css("border-color", "#aaa").css("border-width", "0px 1px 0px 0px").appendTo( obj );
-                var rdiv = $("<div id=\"hmap-right\"><h3 style=\"text-align: center\">Not mapped</h3></div>").css("width", "49%").css("float","left")
-                    .css("height", "100%").css("overflow","scroll").appendTo( obj );
+                var ldiv = $("<div id=\"hmap-left\"><h3 style=\"text-align: center\">"+tr("Mapped")+"</h3></div>").css("width", "50%").css("height", "100%")
+                    .css("float","left").css("overflow","auto").css("border", "solid").css("border-color", "#aaa").css("border-width", "0px 1px 0px 0px").appendTo( obj );
+                var rdiv = $("<div id=\"hmap-right\"><h3 style=\"text-align: center\">"+tr("Not mapped")+"</h3></div>").css("width", "49%").css("float","left")
+                    .css("height", "100%").css("overflow","auto").appendTo( obj );
 				
                 var llist = $('<ul id="llist"></ul>').appendTo( ldiv );
                 var rlist = $('<ul id="rlist"></ul>').appendTo( rdiv );
@@ -267,7 +267,7 @@ function makedragdrop(o, torem, toadd) {
                     o.subobj.splice($.qsglobal.mapid[toadd.attr("objid")],1);
                     setmapid(o, o.subobj);
                 } else {
-                    alert("Delete failed.")
+                    alert(tr("Failed to delete"))
                 }
             }, true, null);
             
@@ -296,7 +296,7 @@ function makedragdrop(o, torem, toadd) {
                     .dialog("open");});
             torem.remove();
             
-            var mapinfo = {token:$.qsglobal.session_token, id1: toadd.attr("objid"), id2: o.id, type: o.type, qty: 1};
+            var mapinfo = {token:$.qsglobal.session_token, id1: toadd.attr("objid"), id2: o.id, type: o.type, qty: 1, starttime: "0:00", duration: "0:00"};
             if(o.pos==1) {
                 mapinfo.id1 = o.id;
                 mapinfo.id2 = toadd.attr("objid");
@@ -307,7 +307,7 @@ function makedragdrop(o, torem, toadd) {
                     o.subobj.push(mapinfo);
                     setmapid(o,o.subobj);
                 } else {
-                    alert("Delete failed.")
+                    alert(tr("Failed to add"))
                 }
             }, true, null);
             

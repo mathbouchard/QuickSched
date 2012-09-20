@@ -3,7 +3,7 @@
  *
  * Copyright 2012, Mathieu Bouchard
  * Licensed under the GPL Version 3 license.
- * http://q-opt.com
+ * http://skdit.com
  *
  */
 
@@ -120,7 +120,7 @@ body {
     width:100%;
 }
 #logo {
-    background:url(../img/q-opt_small_logo.png) no-repeat center center transparent;
+    background:url(../img/GraphHandLogoCircle.png) no-repeat center center transparent;
     width:100px;
 }
 #title {
@@ -130,6 +130,7 @@ body {
     width:280pt;
     text-shadow: 2px 2px 5px rgba(0.1,0.1,0.1,0.5);
     font-size:30px;
+    padding-top: 20px;
 }
 #topelem {
     list-style-type: none;
@@ -155,13 +156,13 @@ body {
 }
 #dologin {
     color:#fff;
-    width:100px;
-    height:40px;
+    width:120px;
+    height:30px;
     /*background: #95a0ff;*/
     background: #a0b4d2;
     position: absolute;
-    right: 20px;
-    top: 30px;
+    right: 120px;
+    top: 35px;
     font-size: 13px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
@@ -174,13 +175,23 @@ body {
 }
 #dologout {
     color:#fff;
-    width:100px;
-    height:40px;
+    width:120px;
+    height:30px;
     /*background: #95a0ff;*/
     background: #a0b4d2;
     position: absolute;
+    right: 120px;
+    top: 35px;
+    font-size: 13px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+}
+
+#langselected {
+    position: absolute;
+    top: 35px;
+    height:30px;
     right: 20px;
-    top: 30px;
     font-size: 13px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
@@ -193,7 +204,7 @@ body {
     height:40px;
     background: transparent;
     position: absolute;
-    right: 130px;
+    right: 250px;
     top: 30px;
     font-size: 15px;
     -moz-border-radius:1px;
@@ -343,8 +354,16 @@ body {
     -khtml-border-bottom-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
+.dummylink {
+    background: #fff;
+    position: absolute;
+    left: 82px;
+    padding: 0;
+    width: 0;
+    height: 0;
+}
 
-#workers {
+#normalscreen {
     background: #fff;
     position: absolute;
     left: 82px;
@@ -355,88 +374,5 @@ body {
     border-top: 1px;
     border-top-color: #888;
     border-top-style: solid;
-}
-#tasks {
-    background: #fff;
-    position: absolute;
-    left: 82px;
-    padding: 0;
-    border-left: 1px;
-    border-left-color: #fff;
-    border-left-style: solid;
-    border-top: 1px;
-    border-top-color: #888;
-    border-top-style: solid;
-}
-#shifts {
-    background: #fff;
-    position: absolute;
-    left: 82px;
-    padding: 0;
-    border-left: 1px;
-    border-left-color: #fff;
-    border-left-style: solid;
-    border-top: 1px;
-    border-top-color: #888;
-    border-top-style: solid;
-}
-#resources {
-    background: #fff;
-    position: absolute;
-    left: 82px;
-    padding: 0;
-    border-left: 1px;
-    border-left-color: #fff;
-    border-left-style: solid;
-    border-top: 1px;
-    border-top-color: #888;
-    border-top-style: solid;
-}
-#tags {
-    background: #fff;
-    position: absolute;
-    left: 82px;
-    padding: 0;
-    border-left: 1px;
-    border-left-color: #fff;
-    border-left-style: solid;
-    border-top: 1px;
-    border-top-color: #888;
-    border-top-style: solid;
-}
-#solver {
-    background: #fff;
-    position: absolute;
-    left: 82px;
-    padding: 0;
-    border-left: 1px;
-    border-left-color: #fff;
-    border-left-style: solid;
-    border-top: 1px;
-    border-top-color: #888;
-    border-top-style: solid;
-}
-#solution {
-    background: #fff;
-    position: absolute;
-    left: 82px;
-    padding: 0;
-    border-left: 1px;
-    border-left-color: #fff;
-    border-left-style: solid;
-    border-top: 1px;
-    border-top-color: #888;
-    border-top-style: solid;
-}
-#settings {
-    background: #fff;
-    position: absolute;
-    left: 82px;
-    padding: 0;
-    border-left: 1px;
-    border-left-color: #fff;
-    border-left-style: solid;
-    border-top: 1px;
-    border-top-color: #888;
-    border-top-style: solid;
+    overflow: hidden;
 }

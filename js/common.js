@@ -3,7 +3,7 @@
  *
  * Copyright 2012, Mathieu Bouchard
  * Licensed under the GPL Version 3 license.
- * http://q-opt.com
+ * http://skdit.com
  *
  */
 
@@ -35,13 +35,25 @@ function postjson(inurl, indata, insuccess, isasync, ondone) {
     });
 }
 
-function getalldata() {
+function myresize() {
+    var newh = $(document).height()-$.qsglobal.toff;
+    var neww = $(window).width()-$.qsglobal.loff;
+    $( "#normalscreen" ).width(neww);
+    $( "#normalscreen" ).height(newh);
+    $( "#taskgantt" ).width(neww);
+    $( "#taskgantt" ).height(newh-66);
+    $( "#taskbar" ).width(neww-20);
+    //if($.qsglobal[].)
+}
+
+/*function getalldata() {
     getworkersdata(showworkers);
     gettagsdata(showtags);
     getresourcesdata(showresources);
     gettasksdata(showtasks);
     getshiftsdata(showshifts);
-    getmapsdata(showshifts);
+    getsolutionsdata(showsolutions);
+    getmapsdata();    
 }
 
 function showworkers() { $( "#workers" ).workersScreen({loff: 83, toff: 101}); }
@@ -49,6 +61,25 @@ function showtags() { $( "#tags" ).tagsScreen({loff: 83, toff: 101}); }
 function showresources() { $( "#resources" ).resourcesScreen({loff: 83, toff: 101}); }
 function showtasks() { $( "#tasks" ).tasksScreen({loff: 83, toff: 101}); }
 function showshifts() { $( "#shifts" ).shiftsScreen({loff: 83, toff: 101}); }
+function showsolutions() { $( "#solutions" ).shiftsScreen({loff: 83, toff: 101}); }*/
+
+function getalldata() {
+    getworkersdata(showworkers);
+    gettagsdata();
+    getresourcesdata();
+    gettasksdata();
+    getshiftsdata();
+    getsolutionsdata();
+    getmapsdata();    
+}
+
+function showworkers() { $( "#normalscreen" ).workersScreen({loff: $.qsglobal.loff, toff: $.qsglobal.toff}); }
+function showtags() { $( "#normalscreen" ).tagsScreen({loff: $.qsglobal.loff, toff: $.qsglobal.toff}); }
+function showresources() { $( "#normalscreen" ).resourcesScreen({loff: $.qsglobal.loff, toff: $.qsglobal.toff}); }
+function showtasks() { $( "#normalscreen" ).tasksScreen({loff: $.qsglobal.loff, toff: $.qsglobal.toff}); }
+function showshifts() { $( "#normalscreen" ).shiftsScreen({loff: $.qsglobal.loff, toff: $.qsglobal.toff}); }
+function showsolutions() { $( "#normalscreen" ).solutionsScreen({loff: $.qsglobal.loff, toff: $.qsglobal.toff}); }
+
 
 function resetalldata() {
     $.qsglobal.workers = null;
@@ -72,6 +103,8 @@ function resetalldata() {
     $( "#solver" ).empty();
     $( "#solution" ).empty();
     $( "#settings" ).empty();
+    $( "#fullscreen" ).empty();
+    $( "#normalscreen" ).empty();
 }
 
 function getmapsdata(done) {
@@ -192,7 +225,7 @@ function preparemap(pos) {
 
 function createproblem(fname) {
     
-    var fileName="myprob.xml";
+    var fileName="mysol.xml";
     var nbPieces=0;
     
     $.get(
@@ -413,9 +446,66 @@ function onLoad(xmlData, strStatus)
         });
         wid++;
     });
-    $("#shifts").shiftsScreen({loff: 83, toff: 101});
+    swid=0;
+    jData.find("employee").each(function() {
+        var emp = $(this);
+        var starttime = 365*24*60;
+        var endtime = 0;
+        $.qsglobal.solutions = [];
+        emp.find("piece").each(function() {
+            var piece = $(this);
+            if(parseInt($(this).attr("begin")) < starttime)
+                starttime = parseInt($(this).attr("begin"));
+            if(parseInt($(this).attr("begin"))+parseInt($(this).attr("length")) > endtime)
+                endtime = parseInt($(this).attr("begin"))+parseInt($(this).attr("length"));    
+            piece.find("activity").each(function() {
+                var solutioninfo = {};
+                solutioninfo.solutiongroupid = 0;
+                solutioninfo.workerid = swid;
+                solutioninfo.assignid = parseInt($(this).attr("type"));
+                solutioninfo.type = 1;
+                solutioninfo.startdate = "2012-09-01";
+                solutioninfo.starttime = formnumber(parseInt($(this).attr("begin")));
+                solutioninfo.enddate = "2012-09-01";
+                solutioninfo.endtime = formnumber(parseInt($(this).attr("begin"))+parseInt($(this).attr("length")));
+                solutioninfo.assign = "1";
+                solutioninfo.token = $.qsglobal.session_token;
+                postjson($.qsglobal.dbaddr+'addsolutions', solutioninfo, function(data) {
+                    if(data.success == "true")
+                    {
+                        $.qsglobal.solutions.push(solutioninfo);
+                    } else {
+                        alert("Solution Save failed: "+emp.attr('id'));
+                    }
+                }, false, null);
+            });
+        });
+        var solutioninfo = {};
+        solutioninfo.solutiongroupid = 0;
+        solutioninfo.workerid = swid;
+        solutioninfo.assignid = swid;
+        solutioninfo.type = 0;
+        solutioninfo.startdate = "2012-09-01";
+        solutioninfo.starttime = formnumber(starttime);
+        solutioninfo.enddate = "2012-09-01";
+        solutioninfo.endtime = formnumber(endtime);
+        solutioninfo.assign = "1";
+        solutioninfo.token = $.qsglobal.session_token;
+        postjson($.qsglobal.dbaddr+'addsolutions', solutioninfo, function(data) {
+            if(data.success == "true")
+            {
+                $.qsglobal.solutions.push(solutioninfo);
+            } else {
+                alert("Solution Save failed: "+emp.attr('id'));
+            }
+        }, false, null);
+        swid++;
+    });
+    /*$("#shifts").shiftsScreen({loff: 83, toff: 101});
     $("#tasks").tasksScreen({loff: 83, toff: 101});
     $("#workers").workersScreen({loff: 83, toff: 101});
+    $("#solutions").solutionsScreen({loff: 83, toff: 101});*/
+    showworkers();
 }
 
 function formnumber(val) {
@@ -428,6 +518,55 @@ function formnumber(val) {
         ret = ret+temp;
     }
     return ret;
+}
+
+function savetodb(opts,o) {
+    var info = {};
+    var pre = o.prefix;
+    for(i = 0; i < o.fields.length; i++) {
+        if(o.fields[i].type=="weekdays") {
+            info.weekdays = parseInt($("#"+pre+"sunday").val())*64+parseInt($("#"+pre+"monday").val())*32+parseInt($("#"+pre+"tuesday").val())*16
+            +parseInt($("#"+pre+"wednesday").val())*8+parseInt($("#"+pre+"thursday").val())*4+parseInt($("#"+pre+"friday").val())*2+parseInt($("#"+pre+"saturday").val());
+            /*info.sunday = $("#"+pre+"sunday").val(); info.monday = $("#"+pre+"monday").val(); info.tuesday = $("#"+pre+"tuesday").val();
+            info.wednesday = $("#"+pre+"wednesday").val(); info.thursday = $("#"+pre+"thursday").val(); info.friday = $("#"+pre+"friday").val();
+            info.saturday = $("#"+pre+"saturday").val();*/
+        } else if (o.fields[i].itemname != null) {
+            info[o.fields[i].itemname] = $("#"+pre+"input-"+i).val();
+        }
+    }
+    for(i = 0; i < o.hiddenval.length; i++) {
+        info[o.hiddenval[i].itemname] =  o.hiddenval[i].val;   
+    }
+    $.each(o.choiceval, function(key,val) {
+        info[key] = val;   
+    });
+    info.token = $.qsglobal.session_token;
+    info.id = "";
+    if(o.ind==-1) {
+        info.id = -1;
+        postjson($.qsglobal.dbaddr+opts.jsonadd, info, function(data) {
+            if(data.success == "true")
+            {
+                info.id = data.id;
+                opts.globalobj.push(info);
+                o.reload();
+            } else {
+                alert(o.tr("Failed to save"));
+            }
+        }, false, null);
+    } else {
+        info.id = o.item.id;
+        postjson($.qsglobal.dbaddr+opts.jsonupdate, info, function(data) {
+            if(data.success == "true")
+            {
+                info.id = o.item.id;
+                opts.globalobj.splice(o.ind,1,info);
+                o.reload();
+            } else {
+                alert(o.tr("Failed to save"));
+            }
+        }, false, null);
+    }
 }
 
 /*

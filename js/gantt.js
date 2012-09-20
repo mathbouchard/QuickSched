@@ -3,7 +3,7 @@
  *
  * Copyright 2012, Mathieu Bouchard
  * Licensed under the GPL Version 3 license.
- * http://q-opt.com
+ * http://skdit.com
  *
  */
 
@@ -31,7 +31,8 @@
                 //obj.addClass("ganttcontainer").css('width',options.currw);   
                 
                 
-                options.currw = options.currw-180;
+                //options.currw = options.currw-180;
+                options.currw = options.currw-160;
                 
                 if(options.data != null)
                 {
@@ -69,8 +70,8 @@
                         $( "<div></div>" ).text((i+1)%24+':00').addClass("gantttime").css('width', backl).css('left', 140+(i+0.5)*backl)
                         .css('top', options.moff+35).appendTo( obj );
                     }
-                    var inside = $( "<div></div>" ).addClass("ganttinside").css('overflow-y','scroll').css('top', 51).css('width', 160+maxwidth)
-                    .css('left', 0).css('height',maxh-117).css('position','absolute').appendTo( obj );
+                    var inside = $( "<div></div>" ).addClass("ganttinside").css('overflow-y','auto').css('overflow-x','hidden').css('top', 51).css('width', 160+maxwidth)
+                    .css('left', 0).css('height',maxh-137).css('position','absolute').appendTo( obj );
                     
                     for(i=0; (i-i%2)*backl+20<maxwidth; i++) {
                         if(i%24==0) {
@@ -85,9 +86,9 @@
                     var ulist = $('<ul class="ganttlist '+options.itemname+'list" id="curr'+options.itemname+'list"></ul>')
                         .selectable({ filter: "li", cancel: ".ui-selected, .ganttblockadd" }).appendTo( inside );//.appendTo( obj );
                     
-                    var gblock = $( "<li></li>" ).text('Add new '+options.itemname+'.').css('width', options.currw+110).addClass("ganttblock").addClass("ganttblockadd")
+                    var gblock = $( "<li></li>" ).text(tr('Add a new '+options.itemname)).css('width', options.currw+110).addClass("ganttblock").addClass("ganttblockadd")
                         .css('top', options.moff).attr("objid", -1).appendTo( ulist );
-                    gblock.click(function() {options.onclick('New '+options.itemname,-1);});
+                    gblock.click(function() {options.onclick(tr('New '+options.itemname),-1);});
                     
                     var it = 0;
                     $.each(options.data, function(key,val) {
