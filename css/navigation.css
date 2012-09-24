@@ -21,6 +21,19 @@ body {
     /*background: #9DB6FA;*/
 }
 
+.menuimg { width: 82px; height: 27px; padding: 0 0 5px 27px; }
+.menutext { width: 82px; font-size: 10px; text-align: center }
+
+.sprite { background: url('../img/qssprite.png') no-repeat center center transparent;  } 
+.sprite.resource-col { background-position: 0px 0px; width: 27px; height: 27px; } 
+.sprite.setting-col { background-position: -27px 0px; width: 27px; height: 27px;  } 
+.sprite.shift-col { background-position: -54px 0px; width: 27px; height: 27px;  } 
+.sprite.solution-col { background-position: -81px 0px; width: 27px; height: 27px;  } 
+.sprite.solver-col { background-position: -108px 0px; width: 27px; height: 21px;  } 
+.sprite.task-col { background-position: -135px 0px; width: 27px; height: 27px;  } 
+.sprite.tag-col { background-position: -162px 0px; width: 27px; height: 22px;  } 
+.sprite.worker-col { background-position: -189px 0px; width: 27px; height: 27px;  } 
+
 .vmap-active {
     color: #333;
 }
@@ -191,10 +204,12 @@ body {
     position: absolute;
     top: 35px;
     height:30px;
+    border: 1;
     right: 20px;
     font-size: 13px;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
+    /*-moz-border-radius:3px;
+    -webkit-border-radius:3px;*/
+    margin: 0;
 }
 
 #usernametag {

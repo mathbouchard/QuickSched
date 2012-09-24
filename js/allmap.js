@@ -48,7 +48,7 @@
                     $.each(o.upobj, function(key,val) {
                         var imgpart = "";
                         if(o.upimg) {
-                            var imglink = "img/someone_wb.png";
+                            var imglink = "img/someone.png";
                             if(val.picturelink != null && val.picturelink != "") {
                                 imglink = val.picturelink;  
                             }
@@ -79,7 +79,7 @@
                     $.each(o.downobj, function(key,val) {
                         var imgpart = "";
                         if(o.downimg) {
-                            var imglink = "img/someone_wb.png";
+                            var imglink = "img/someone.png";
                             if(val.picturelink != null && val.picturelink != "") {
                                 imglink = val.picturelink;  
                             }
@@ -181,7 +181,7 @@
                     var item = o.obj[corrmap[val]];
                     var imgpart = "";
                     if(o.img) {
-                        var imglink = "img/someone_wb.png";
+                        var imglink = "img/someone.png";
                         if(item.picturelink != null) {
                             imglink = item.picturelink;  
                         }
@@ -203,7 +203,7 @@
                         var imgpart = "";
                         if(objmap[val.id] != true) {
                             if(o.img) {
-                                var imglink = "img/someone_wb.png";
+                                var imglink = "img/someone.png";
                                 if(val.picturelink != null && val.picturelink != "") {
                                     imglink = val.picturelink;  
                                 }

@@ -8,8 +8,7 @@
 <head>
     <meta charset='utf-8'/>
     <title>skdit</title>
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="css/formalize.css" /> -->
-    <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui-quicksched.css" />
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui-quicksched.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/navigation.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/gantt.css" />
@@ -19,31 +18,18 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/tasks.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/shifts.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/forms.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/solutions.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/solutions.css" /> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/qsall.css" />
     <link rel="shortcut icon" href="favicon.ico">
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script> 
-    <script type="text/javascript" src="js/jquery.js"></script>  
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/jquery.formalize.min.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="js/jquery.ui.map.full.min.js"></script>
-    <script type="text/javascript" src="js/wiki2html.js"></script>
-    <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="js/allmap.js"></script>
-    <script type="text/javascript" src="js/colorpicker.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+    <!-- <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" src="js/gantt.js"></script>
-    <script type="text/javascript" src="js/forms.js"></script>
     <script type="text/javascript" src="js/workers.js"></script>
-    <script type="text/javascript" src="js/tags.js"></script>
-    <script type="text/javascript" src="js/resources.js"></script>
-    <script type="text/javascript" src="js/tasks.js"></script>
-    <script type="text/javascript" src="js/shifts.js"></script>
-    <script type="text/javascript" src="js/solutions.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/languages.js"></script>
-    <script type="text/javascript" src="js/quicksched.js"></script>
-    
+    <script type="text/javascript" src="js/quicksched.js"></script> -->
+    <script type="text/javascript" src="js/qsall.js"></script>
 </head>
 <body>
     <div id="appmain">
@@ -77,14 +63,14 @@
         </div>
         <div id="maintabs">
                 <ul>
-                    <li class="qs-left-menu"><a href="#workers"><img src="img/worker-col.png" border="0"><div id="liwo" style="width: 82px; font-size: 10px; text-align: center">orkers</div></a></li>
-                    <li class="qs-left-menu"><a href="#tasks"><img src="img/task-col.png" border="0"><div id="lita" style="font-size: 10px; text-align: center">asks</div></a></li>
-                    <li class="qs-left-menu"><a href="#shifts"><img src="img/shift-col.png" border="0"><div id="lish" style="font-size: 10px; text-align: center">hifts</div></a></li>
-                    <li class="qs-left-menu"><a href="#resources"><img src="img/resource-col.png" border="0"><div id="lire" style="font-size: 10px; text-align: center">esources</div></a></li>
-                    <li class="qs-left-menu"><a href="#tags"><img src="img/tag-col.png" border="0"><div id="litg" style="font-size: 10px; text-align: center">ags</div></a></li>
-                    <li class="qs-left-menu"><a href="#solver"><img src="img/solver-col.png" border="0"><div id="liso" style="font-size: 10px; text-align: center">olver</div></a></li>
-                    <li class="qs-left-menu"><a href="#solution"><img src="img/solution-col.png" border="0"><div id="lisl" style="font-size: 10px; text-align: center">olution</div></a></li>
-                    <li class="qs-left-menu"><a href="#settings"><img src="img/setting-col.png" border="0"><div id="lise" style="font-size: 10px; text-align: center">ettings</div></a></li>
+                    <li class="qs-left-menu"><a href="#workers"><div class="menuimg"><div class="sprite worker-col"></div></div><div class="menutext" id="liwo">Workers</div></a></li>
+                    <li class="qs-left-menu"><a href="#tasks"><div class="menuimg"><div class="sprite task-col"></div></div><div class="menutext" id="lita">Tasks</div></a></li>
+                    <li class="qs-left-menu"><a href="#shifts"><div class="menuimg"><div class="sprite shift-col"></div></div><div class="menutext" id="lish">Shifts</div></a></li>
+                    <li class="qs-left-menu"><a href="#resources"><div class="menuimg"><div class="sprite resource-col"></div></div><div class="menutext" id="lire">Resources</div></a></li>
+                    <li class="qs-left-menu"><a href="#tags"><div class="menuimg"><div class="sprite tag-col"></div></div><div class="menutext" id="litg">Tags</div></a></li>
+                    <li class="qs-left-menu"><a href="#solver"><div class="menuimg"><div class="sprite solver-col"></div></div><div class="menutext" id="liso">Solver</div></a></li>
+                    <li class="qs-left-menu"><a href="#solution"><div class="menuimg"><div class="sprite solution-col"></div></div><div class="menutext" id="lisl">Solution</div></a></li>
+                    <li class="qs-left-menu"><a href="#settings"><div class="menuimg"><div class="sprite setting-col"></div></div><div class="menutext" id="lise">Settings</div></a></li>
                 </ul>
                 <div id="workers" class="mainpanel dummylink"></div>
                 <div id="tasks" class="mainpanel dummylink"></div>
@@ -111,5 +97,20 @@
     <div id="locmap" title="Set location"></div>
     <div id="tasknotes" title="Task note"></div>
     <div id="fullscreen"></div>
+    
+    <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script> 
+    <!-- <script type="text/javascript" src="js/jquery.ui.map.full.min.js"></script> -->
+    <script type="http://jquery-ui-map.googlecode.com/svn/trunk/ui/min/jquery.ui.map.full.min.js"></script>
+    <!-- <script type="text/javascript" src="js/wiki2html.js"></script>
+    <script type="text/javascript" src="js/allmap.js"></script>
+    <script type="text/javascript" src="js/colorpicker.js"></script>
+    <script type="text/javascript" src="js/gantt.js"></script>
+    <script type="text/javascript" src="js/forms.js"></script>
+    <script type="text/javascript" src="js/tags.js"></script>
+    <script type="text/javascript" src="js/resources.js"></script>
+    <script type="text/javascript" src="js/tasks.js"></script>
+    <script type="text/javascript" src="js/shifts.js"></script>
+    <script type="text/javascript" src="js/solutions.js"></script> -->
 </body>                                                                 
 </html>
