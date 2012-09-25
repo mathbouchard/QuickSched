@@ -243,9 +243,18 @@
 					var len = stop - shiftstart;
 					var content = $('#gutter'+colid).html();
 //											$('#gutter'+colid).html(content + '<div class="chip" style="top:'+start+'px;left:'+poscolpercent+'%;width:'+sizecolpercent+'%;"><dl class="cbrd" style="height:' + len + 'px;border-color:#7BD148;background-color:' + $.qsglobal.workers[wk].color + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px"><dt style="background-color:;">5:30p – 8:30p <i class="cic cic-dm  cic-tmr" title="Reminders">&nbsp;</i></dt><dd><span class="evt-lk ca-elp204" style="cursor: pointer; ">(No title)</span></dd></dl></div>');
-					$('#gutter'+colid).html(content + '<div id="'+myshiftid+'" class="chip chipShift" style="top:'+shiftstart+'px;left:'+poscolpercent+'%;width:'+sizecolpercent+'%;border-color: #000000; z-index:1000"><dl class="cbrd" style="height:' + len + 'px;border-color:#000000;background-color:' + $.qsglobal.workers[wk].color + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px"></dl></div>');
+					//$('#gutter'+colid).html(content + '<div id="'+myshiftid+'" class="chip chipShift" style="top:'+shiftstart+'px;left:'+poscolpercent+'%;width:'+sizecolpercent+'%;border-color: #000000; z-index:1000"><dl class="cbrd" style="height:' + len + 'px;border-color:#000000;background-color:' + $.qsglobal.workers[wk].color + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px"></dl></div>');
+                                        $('#gutter'+colid).html(content +
+                                            '<div id="'+myshiftid+'" class="chip chipShift" style="top:'+shiftstart+'px;left:'+poscolpercent+'%;width:'+8*sizecolpercent/10+'%;height:' + len + 'px;border-color: #000000; z-index:1000">'+
+                                            '<div style="width:15%;border-color: #000000; z-index:1000"><dl class="cbrd" style="height:' + len + 'px;border-color:#000000;background-color:' + $.qsglobal.workers[wk].color + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px"></dl></div>'+
+                                            '<div id="in-'+myshiftid+'" style="left:15%;width:85%;border-color: #000000; z-index:1000"><dl class="cbrd" style="height:' + len + 'px;border-color:#000000;background-color:' + 'transparent' + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px"></dl></div>'+
+                                            '<div/>'
+                                            
+                                            );
 					content = $('#gutter'+colid).html();
-					$('#gutter'+colid).html(content + '<div id="Drag'+myshiftid+'" class="chip chipDragShift" data-staticmaster="'+myshiftid+'" style="top:'+shiftstart+'px;left:'+poscolpercent+'%;width:'+sizecolpercent+'%;border-color: #000000; z-index:1000"><dl class="cbrd" style="height:' + len + 'px;border-color:#000000;background-color:' + $.qsglobal.workers[wk].color + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px"></dl></div>');
+                                        
+					//$('#gutter'+colid).html(content + '<div id="Drag'+myshiftid+'" class="chip chipDragShift" data-staticmaster="'+myshiftid+'" style="top:'+shiftstart+'px;left:'+poscolpercent+'%;width:'+sizecolpercent+'%;border-color: #000000; z-index:1000"><dl class="cbrd" style="height:' + len + 'px;border-color:#000000;background-color:' + $.qsglobal.workers[wk].color + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px"></dl></div>');
+                                        $('#gutter'+colid).html(content + '<div id="Drag'+myshiftid+'" class="chip chipDragShift" data-staticmaster="'+myshiftid+'" style="top:'+shiftstart+'px;left:'+poscolpercent+'%;width:'+sizecolpercent+'%;border-color: #000000; border: 0; z-index:1000"><dl class="cbrd" style="height:' + len + 'px;border-color:#000000;background-color:' + 'transparent' + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px"></dl></div>');
 				}
 				
 				for( tk in byDate[ dateshown[d] ][ wk ].tasks )
@@ -266,7 +275,7 @@
 					var taskid = byDate[ dateshown[d] ][ wk ].tasks[tk].assignid;
 					var mytaskid = "task-" + dateshown[d] + "-" + wk + "-" + taskid;
 					
-					$('#'+myshiftid).html(content + '<div class="chip chipTask" style="top:'+start+'px;left:25%;width:50%;border-radius: 20% 20% 20% 20%;border-color: #999999; z-index:1500"><dl class="cbrd" style="height:' + len + 'px;border-color:#999999;background-color:' + $.qsglobal.tasks[taskid].color + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px;border-radius: 20% 20% 20% 20%;"></dl></div>');
+					$('#'+myshiftid).html(content + '<div class="chip chipTask" style="top:'+start+'px;left:35%;width:35%;border-radius: 0;border-color: #444; z-index:1500"><dl class="cbrd" style="height:' + len + 'px;border-color:#999999;background-color:' + $.qsglobal.tasks[taskid].color + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px;border: 0;"></dl></div>');
 					//$('#'+myshiftid).html(content + '<div class="chip" style="top:'+start+'px;left:25%;width:50%;border-radius: 20% 20% 20% 20%;border-color: #999999; z-index:1500"><dl class="cbrd" style="height:' + len + 'px;border-color:#999999;background-color:' + $.qsglobal.tasks[taskid].color + ';color:#777777;-webkit-margin-before:0px;-webkit-margin-after:0px;border-radius: 20% 20% 20% 20%;"></dl></div>');
 				}
 				

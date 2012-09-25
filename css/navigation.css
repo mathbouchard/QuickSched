@@ -19,6 +19,7 @@ body {
     /*background: #e9f1f9;*/
     background: #444;
     /*background: #9DB6FA;*/
+    /*background: url('../img/greytext.jpeg') repeat; */
 }
 
 .menuimg { width: 82px; height: 27px; padding: 0 0 5px 27px; }
@@ -203,12 +204,13 @@ body {
 #langselected {
     position: absolute;
     top: 35px;
+    width: 90px;
     height:30px;
     border: 1;
     right: 20px;
     font-size: 13px;
-    /*-moz-border-radius:3px;
-    -webkit-border-radius:3px;*/
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
     margin: 0;
 }
 
@@ -391,3 +393,9 @@ body {
     border-top-style: solid;
     overflow: hidden;
 }
+
+GŽnerateur de rapport: 40 heures
+Lien avec google docs spreadsheet: 16 heures;
+Listes ajustables: 16 heures;
+Rapport de quantite: 16 heures;
+Rapport statistiques: 24 heures;
