@@ -39,7 +39,8 @@ function definelanguages() {
                         "Заполните поля обязательные для заполнения", "आवश्यक फ़ील्ड भरें","למלא את השדות הדרושים","ملء الحقول المطلوبة"];
     $.qsglobal.lang["Demands"] = ["Demands", "Demandes", "Demandas", "Richieste", "Anforderungen", "Demandas", "Wymagania", "要求", "需求", "запросы", "मांगों को","דרישות","المطالب"];
     $.qsglobal.lang["Zoom"] = ["Zoom", "Zoom", "Enfocar", "Zoom", "Zoom", "Zoom", "Powiększ", "ズーム", "放大", "увеличать", "ज़ूम","זום","زوم"];
-    $.qsglobal.lang["Add a new task"] = ["Add a new task", "Ajouter une nouvelle tâche", "Agregar una tarea nueva", "Aggiungi un nuovo compito",
+    //$.qsglobal.lang["Add a new task"] = ["Add a new task", "Ajouter une nouvelle tâche", "Agregar una tarea nueva", "Aggiungi un nuovo compito",
+    $.qsglobal.lang["Add a new task"] = ["Add a new task", "Ajouter un nouvel événement", "Agregar una tarea nueva", "Aggiungi un nuovo compito",
                         "Fügen Sie eine neue Aufgabe", "Adicionar uma nova tarefa", "Dodać nowe zadanie", "新しいタスクを追加", "添加一个新的任务",
                         "Добавить новую задачу", "कोई नया कार्य जोड़ें","הוסף משימה חדשה","إضافة مهمة جديدة"];
     $.qsglobal.lang["Add a new shift"] = ["Add a new shift", "Ajouter un nouveau quart", "Añadir un nuevo turno", "Aggiungi un nuovo turno",
@@ -48,7 +49,8 @@ function definelanguages() {
     $.qsglobal.lang["Add a new resource"] = ["Add a new resource", "Ajouter une nouvelle ressource", "Añadir un nuevo recurso", "Aggiungi una nuova risorsa",
                         "Hinzufügen einer neuen Ressource", "Adicionar um novo recurso", "Dodaj nowy zasób", "新しいリソースを追加する", "添加新的资源",
                         "Добавить новый ресурс", "एक नया संसाधन जोड़ेंें","הוסף משאב חדש","إضافة مورد جديد"];
-    $.qsglobal.lang["Add a new tag"] = ["Add a new tag", "Ajouter une nouvelle étiquette", "Agregar una nueva etiqueta", "Aggiungere un nuova etichetta",
+    //$.qsglobal.lang["Add a new tag"] = ["Add a new tag", "Ajouter une nouvelle étiquette", "Agregar una nueva etiqueta", "Aggiungere un nuova etichetta",
+    $.qsglobal.lang["Add a new tag"] = ["Add a new tag", "Ajouter une nouveau groupe", "Agregar una nueva etiqueta", "Aggiungere un nuova etichetta",
                         "Fügen Sie einen neuen Etikett", "Adicionar nova etiqueta", "Dodaj nową etykietę", "新しいタグを追加", "添加一个新的标签",
                         "Добавить новый тег", "एक नए टैग जोड़ें","הוסף תג חדש","إضافة تسمية جديدة"];
     $.qsglobal.lang["Failed to delete"] = ["Failed to delete", "Échec de suppression", "No se ha podido borrar", "Impossibile eliminare",

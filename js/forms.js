@@ -83,7 +83,7 @@
                         if($( "#"+pre+"input-"+i ).val() == "") {
                             $( "#"+pre+"input-"+i ).button().click(function() { $.qsglobal.currcoord = $(this); setmap('0,0',$( "#"+pre+"input-"+i ),true);});
                         } else {
-                            $( "#"+pre+"input-"+i ).button().click(function() { $.qsglobal.currcoord = $(this); setmap($( "#"+pre+"input-"+i ).val(),$( "#"+pre+"input-"+i ),false);});
+                            $( "#"+pre+"input-"+i ).button().click(function() { $.qsglobal.currcoord = $(this); setmap($( this ).val(),$( "#"+pre+"input-"+i ),false);});
                         }    
                     }
                     if(o.fields[i].type=="toggle") {
